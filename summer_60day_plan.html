@@ -1,0 +1,413 @@
+
+<style>
+.wrap { padding: 1rem 0; font-size: 14px; color: var(--color-text-primary); }
+.day-nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+.day-btn { font-size: 12px; padding: 5px 10px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); background: transparent; color: var(--color-text-secondary); cursor: pointer; transition: all .15s; }
+.day-btn:hover { background: var(--color-background-secondary); color: var(--color-text-primary); }
+.day-btn.active { background: var(--color-background-secondary); border-color: var(--color-border-primary); color: var(--color-text-primary); font-weight: 500; }
+.day-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+.day-header { padding: 14px 18px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.day-title { font-size: 16px; font-weight: 500; margin: 0 0 4px; }
+.day-subtitle { font-size: 12px; color: var(--color-text-secondary); margin: 0; }
+.day-body { padding: 0; }
+.slot { display: grid; grid-template-columns: 110px 1fr; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.slot:last-child { border-bottom: none; }
+.slot-time { padding: 12px 14px; background: var(--color-background-secondary); border-right: 0.5px solid var(--color-border-tertiary); }
+.slot-time .time { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px; }
+.slot-time .dur { font-size: 11px; color: var(--color-text-tertiary); margin: 0; }
+.slot-content { padding: 12px 16px; }
+.slot-label { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+.slot-icon { font-size: 15px; }
+.slot-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.slot-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; margin: 0 0 7px; }
+.res-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.res-link { font-size: 11px; padding: 3px 8px; border-radius: 20px; text-decoration: none; font-weight: 500; }
+.res-yt { background: #FCEBEB; color: #791F1F; }
+.res-pdf { background: #FAEEDA; color: #633806; }
+.res-web { background: #E6F1FB; color: #0C447C; }
+.res-lc { background: #EAF3DE; color: #27500A; }
+.tip-box { margin: 14px 16px 14px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; }
+.tip-label { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: .05em; margin: 0 0 4px; }
+.tip-text { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; margin: 0; }
+.tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px; }
+.tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+.tag-gh { background: #EEEDFE; color: #3C3489; }
+.tag-ai { background: #FBEAF0; color: #72243E; }
+.tag-lc { background: #EAF3DE; color: #27500A; }
+.tag-apt { background: #FAEEDA; color: #633806; }
+</style>
+<h2 class="sr-only">60-day summer vacation daily plan for students covering GitHub, AI tools, LeetCode, and aptitude preparation</h2>
+<div class="wrap">
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px;">
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;">
+    <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:3px;">Duration</div>
+    <div style="font-size:18px;font-weight:500;">60 days</div>
+  </div>
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;">
+    <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:3px;">Daily study</div>
+    <div style="font-size:18px;font-weight:500;">3.5 hrs</div>
+  </div>
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;">
+    <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:3px;">LeetCode target</div>
+    <div style="font-size:18px;font-weight:500;">120 Qs</div>
+  </div>
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;">
+    <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:3px;">Aptitude Qs</div>
+    <div style="font-size:18px;font-weight:500;">~1800</div>
+  </div>
+</div>
+
+<div style="margin-bottom:14px;">
+  <div style="font-size:11px;color:var(--color-text-tertiary);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Select day</div>
+  <div class="day-nav" id="dayNav"></div>
+</div>
+
+<div class="day-card" id="dayCard"></div>
+
+</div>
+
+<script>
+const days = [
+  {
+    day: 1,
+    title: "Git & GitHub — absolute basics",
+    subtitle: "What is version control? Setting up GitHub account and first repo.",
+    tags: ["tag-gh"],
+    tagLabels: ["GitHub"],
+    slots: [
+      {
+        time: "9:00 AM", dur: "60 min",
+        icon: "ti-brand-github", name: "GitHub setup & concepts",
+        desc: "Watch intro video. Create GitHub account. Understand: repo, commit, push, pull. Install Git on your laptop.",
+        resources: [
+          {label:"YT: Git & GitHub in 1hr — Apna College", type:"res-yt", url:"https://www.youtube.com/watch?v=Ez8F0nW6S-w"},
+          {label:"YT: GitHub for beginners — FreeCodeCamp", type:"res-yt", url:"https://www.youtube.com/watch?v=RGOj5yH7evk"},
+          {label:"Docs: GitHub Quickstart", type:"res-web", url:"https://docs.github.com/en/get-started/quickstart"}
+        ]
+      },
+      {
+        time: "10:15 AM", dur: "45 min",
+        icon: "ti-math-function", name: "Aptitude — Percentages basics",
+        desc: "Concept: percentage formulas, percentage increase/decrease, back-calculation. Solve 25 questions.",
+        resources: [
+          {label:"IndiaBix Percentages", type:"res-web", url:"https://www.indiabix.com/aptitude/percentage/"},
+          {label:"YT: Percentages shortcuts — Padhle", type:"res-yt", url:"https://www.youtube.com/watch?v=CJcOz40-qlE"},
+          {label:"PrepInsta Practice", type:"res-web", url:"https://prepinsta.com/aptitude/percentage/"}
+        ]
+      },
+      {
+        time: "11:15 AM", dur: "40 min",
+        icon: "ti-code", name: "LeetCode — 2 Easy problems",
+        desc: "Problems: #1 Two Sum, #9 Palindrome Number. Read problem carefully, attempt, then study solution.",
+        resources: [
+          {label:"LeetCode Easy list", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
+          {label:"YT: Two Sum walkthrough — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=KLlXCFG5TnA"}
+        ]
+      }
+    ],
+    tip: "Day 1 tip: Don't rush the GitHub setup. A clean first repo with a proper README is more valuable than speed. Use your college email to unlock GitHub Student Developer Pack (free tools)."
+  },
+  {
+    day: 2,
+    title: "Git workflow + AI Tool #1: ChatGPT / Claude",
+    subtitle: "Learn branching, commit messages. Explore AI tools for learning.",
+    tags: ["tag-gh","tag-ai"],
+    tagLabels: ["GitHub","AI Tools"],
+    slots: [
+      {
+        time: "9:00 AM", dur: "50 min",
+        icon: "ti-brand-github", name: "Git branching & commit messages",
+        desc: "Learn: git branch, git checkout, git merge, pull requests. Create a branch in your repo and raise your first PR.",
+        resources: [
+          {label:"YT: Git Branching — Traversy Media", type:"res-yt", url:"https://www.youtube.com/watch?v=QV0kVNvkMxc"},
+          {label:"Interactive: Learn Git Branching", type:"res-web", url:"https://learngitbranching.js.org/"},
+          {label:"PDF: Git Cheat Sheet — GitHub", type:"res-pdf", url:"https://education.github.com/git-cheat-sheet-education.pdf"}
+        ]
+      },
+      {
+        time: "10:00 AM", dur: "50 min",
+        icon: "ti-robot", name: "AI Tool #1 — ChatGPT / Claude for studying",
+        desc: "Learn how to use AI to explain concepts, generate practice questions, debug code, and summarize topics. Practice prompting techniques.",
+        resources: [
+          {label:"ChatGPT", type:"res-web", url:"https://chat.openai.com"},
+          {label:"Claude.ai", type:"res-web", url:"https://claude.ai"},
+          {label:"YT: ChatGPT for students — TechWithTim", type:"res-yt", url:"https://www.youtube.com/watch?v=JTxsNm9IdYU"}
+        ]
+      },
+      {
+        time: "11:00 AM", dur: "40 min",
+        icon: "ti-math-function", name: "Aptitude — Percentages advanced",
+        desc: "Mixed percentage problems: successive % change, profit-loss link, population growth. Solve 25 Qs.",
+        resources: [
+          {label:"RS Aggarwal Ch.1 (PDF)", type:"res-pdf", url:"https://www.pdfdrive.com/rs-aggarwal-quantitative-aptitude-e9783548.html"},
+          {label:"IndiaBix Practice", type:"res-web", url:"https://www.indiabix.com/aptitude/percentage/"}
+        ]
+      },
+      {
+        time: "11:45 AM", dur: "35 min",
+        icon: "ti-code", name: "LeetCode — 2 Easy problems",
+        desc: "#13 Roman to Integer, #20 Valid Parentheses. Focus on string/array manipulation patterns.",
+        resources: [
+          {label:"LeetCode Easy", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
+          {label:"YT: Valid Parentheses — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=WTzjTskDFMg"}
+        ]
+      }
+    ],
+    tip: "AI tool tip: Use Claude or ChatGPT to explain any aptitude concept you don't understand — ask it to 'explain this like I'm in 1st year engineering, give 3 examples'. It's like having a tutor 24/7."
+  },
+  {
+    day: 3,
+    title: "GitHub profile + AI Tool #2: Notion AI / Gamma",
+    subtitle: "Build your GitHub profile README. Learn AI for notes & presentations.",
+    tags: ["tag-gh","tag-ai"],
+    tagLabels: ["GitHub","AI Tools"],
+    slots: [
+      {
+        time: "9:00 AM", dur: "55 min",
+        icon: "ti-brand-github", name: "GitHub profile README",
+        desc: "Create a professional GitHub profile README with stats, skills, and contact. Use GitHub's profile repo (username/username).",
+        resources: [
+          {label:"YT: GitHub Profile README — Akhil Sharma", type:"res-yt", url:"https://www.youtube.com/watch?v=KhGWbt1dAKQ"},
+          {label:"GitHub README generator", type:"res-web", url:"https://rahuldkjain.github.io/gh-profile-readme-generator/"},
+          {label:"GitHub Stats card", type:"res-web", url:"https://github.com/anuraghazra/github-readme-stats"}
+        ]
+      },
+      {
+        time: "10:00 AM", dur: "50 min",
+        icon: "ti-robot", name: "AI Tool #2 — Notion AI or Gamma.app",
+        desc: "Notion AI: create study notes, summarize topics automatically. Gamma.app: generate study presentations from text. Both free for students.",
+        resources: [
+          {label:"Notion AI", type:"res-web", url:"https://www.notion.so/product/ai"},
+          {label:"Gamma.app", type:"res-web", url:"https://gamma.app"},
+          {label:"YT: Notion AI for students", type:"res-yt", url:"https://www.youtube.com/watch?v=6bkGl6Q4hBY"}
+        ]
+      },
+      {
+        time: "11:00 AM", dur: "40 min",
+        icon: "ti-puzzle", name: "Aptitude — Ratio & Proportion basics",
+        desc: "Ratios, proportion, direct/inverse variation, unitary method. 25 Qs from IndiaBix.",
+        resources: [
+          {label:"IndiaBix Ratios", type:"res-web", url:"https://www.indiabix.com/aptitude/ratio-and-proportion/"},
+          {label:"YT: Ratio & Proportion — Padhle", type:"res-yt", url:"https://www.youtube.com/watch?v=lENEh02kJuM"},
+          {label:"PrepInsta Practice", type:"res-web", url:"https://prepinsta.com/aptitude/ratio-and-proportion/"}
+        ]
+      },
+      {
+        time: "11:45 AM", dur: "35 min",
+        icon: "ti-code", name: "LeetCode — 2 Easy problems",
+        desc: "#21 Merge Two Sorted Lists, #26 Remove Duplicates. Focus on linked list / array basics.",
+        resources: [
+          {label:"LeetCode Easy", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
+          {label:"YT: Merge Sorted Lists — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=XIdigk956u0"}
+        ]
+      }
+    ],
+    tip: "GitHub tip: Commit something every day — even just a small README update. Employers literally look at your GitHub activity graph (the green squares). A consistent streak from 2nd year is impressive."
+  },
+  {
+    day: 4,
+    title: "Git collaboration + AI Tool #3: GitHub Copilot",
+    subtitle: "Forks, issues, open source basics. AI-assisted coding with Copilot.",
+    tags: ["tag-gh","tag-ai","tag-lc"],
+    tagLabels: ["GitHub","AI Tools","LeetCode"],
+    slots: [
+      {
+        time: "9:00 AM", dur: "50 min",
+        icon: "ti-brand-github", name: "Forks, issues & open source",
+        desc: "Fork a public repo, make a small change (fix a typo in README), raise a PR. Understand issues and contribution workflow.",
+        resources: [
+          {label:"YT: How to contribute to open source — FreeCodeCamp", type:"res-yt", url:"https://www.youtube.com/watch?v=yzeVMecydCE"},
+          {label:"Guide: First contributions", type:"res-web", url:"https://firstcontributions.github.io/"},
+          {label:"Good First Issues", type:"res-web", url:"https://goodfirstissue.dev/"}
+        ]
+      },
+      {
+        time: "10:00 AM", dur: "50 min",
+        icon: "ti-robot", name: "AI Tool #3 — GitHub Copilot",
+        desc: "Free for students. Install in VS Code. Learn how Copilot suggests code, completes functions, and explains errors. Practice using it with small programs.",
+        resources: [
+          {label:"GitHub Copilot Student", type:"res-web", url:"https://github.com/education/students"},
+          {label:"YT: GitHub Copilot tutorial — Fireship", type:"res-yt", url:"https://www.youtube.com/watch?v=hPVatUSvZq0"},
+          {label:"VS Code + Copilot setup", type:"res-web", url:"https://code.visualstudio.com/docs/copilot/overview"}
+        ]
+      },
+      {
+        time: "11:00 AM", dur: "40 min",
+        icon: "ti-puzzle", name: "Aptitude — Simple & Compound Interest",
+        desc: "SI and CI formulas, difference between SI and CI, compound interest variations. 20 Qs each.",
+        resources: [
+          {label:"IndiaBix SI", type:"res-web", url:"https://www.indiabix.com/aptitude/simple-interest/"},
+          {label:"IndiaBix CI", type:"res-web", url:"https://www.indiabix.com/aptitude/compound-interest/"},
+          {label:"YT: SI & CI tricks — Unacademy", type:"res-yt", url:"https://www.youtube.com/watch?v=ABIJ0IWXfrc"}
+        ]
+      },
+      {
+        time: "11:45 AM", dur: "35 min",
+        icon: "ti-code", name: "LeetCode — 2 Easy problems",
+        desc: "#70 Climbing Stairs, #83 Remove Duplicates from Sorted List. Introduces basic dynamic programming thinking.",
+        resources: [
+          {label:"LeetCode Easy", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
+          {label:"YT: Climbing Stairs DP — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=Y0lT9Fck7qI"}
+        ]
+      }
+    ],
+    tip: "Copilot tip: Don't let Copilot write everything for you — use it to check your logic, not replace it. Type the problem logic yourself first, then see how Copilot would do it differently. That comparison is where learning happens."
+  },
+  {
+    day: 5,
+    title: "Weekly review + Logical Reasoning begins",
+    subtitle: "Consolidate GitHub + AI tools. Start logical reasoning.",
+    tags: ["tag-apt","tag-lc"],
+    tagLabels: ["Aptitude","LeetCode"],
+    slots: [
+      {
+        time: "9:00 AM", dur: "45 min",
+        icon: "ti-refresh", name: "GitHub mini-project",
+        desc: "Create a small public repo: 'placement-prep'. Add a folder structure, README with your 60-day goal, and commit your first aptitude solution file.",
+        resources: [
+          {label:"Markdown guide for README", type:"res-web", url:"https://www.markdownguide.org/basic-syntax/"},
+          {label:"GitHub Student Pack", type:"res-web", url:"https://education.github.com/pack"}
+        ]
+      },
+      {
+        time: "9:50 AM", dur: "50 min",
+        icon: "ti-brain", name: "Logical Reasoning — Number series & coding-decoding",
+        desc: "Number series patterns, letter coding, symbol coding. Solve 20 questions. These appear in every campus placement test.",
+        resources: [
+          {label:"IndiaBix Logical Reasoning", type:"res-web", url:"https://www.indiabix.com/logical-reasoning/"},
+          {label:"YT: Logical Reasoning basics — Padhle", type:"res-yt", url:"https://www.youtube.com/watch?v=1Hy8N2bVQeU"},
+          {label:"PrepInsta Logical", type:"res-web", url:"https://prepinsta.com/logical-reasoning/"}
+        ]
+      },
+      {
+        time: "10:45 AM", dur: "40 min",
+        icon: "ti-puzzle", name: "Aptitude — Time & Work basics",
+        desc: "Work efficiency, combined work, pipes & cisterns formula derivation. 20 Qs practice.",
+        resources: [
+          {label:"IndiaBix Time & Work", type:"res-web", url:"https://www.indiabix.com/aptitude/time-and-work/"},
+          {label:"YT: Time & Work — Padhle", type:"res-yt", url:"https://www.youtube.com/watch?v=6TLLP7HBcEU"},
+          {label:"PrepInsta Practice", type:"res-web", url:"https://prepinsta.com/aptitude/time-and-work/"}
+        ]
+      },
+      {
+        time: "11:30 AM", dur: "35 min",
+        icon: "ti-code", name: "LeetCode — 2 Easy problems",
+        desc: "#104 Max Depth Binary Tree, #121 Best Time to Buy/Sell Stock. Focus on understanding the problem statement clearly.",
+        resources: [
+          {label:"LeetCode Easy", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
+          {label:"YT: Best Time to Buy/Sell — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=1pkOgXD63yU"}
+        ]
+      }
+    ],
+    tip: "Review tip: Look back at Day 1–4. Can you create a new GitHub repo from scratch without notes? Can you explain to a friend what ChatGPT and Copilot do differently? If yes, you've genuinely learned it."
+  },
+  {
+    day: 6,
+    title: "First full mock test day",
+    subtitle: "Simulate a real campus test. Timed aptitude + LeetCode + reflection.",
+    tags: ["tag-apt","tag-lc"],
+    tagLabels: ["Aptitude","LeetCode"],
+    slots: [
+      {
+        time: "9:00 AM", dur: "60 min",
+        icon: "ti-clock", name: "Mock aptitude test — 40 questions, timed",
+        desc: "Take a full 40-question timed test on PrepInsta or IndiaBix covering: percentages, ratio, SI/CI, time & work. Set a 40-minute timer. No help allowed.",
+        resources: [
+          {label:"PrepInsta Mock Test", type:"res-web", url:"https://prepinsta.com/aptitude/"},
+          {label:"IndiaBix Full Test", type:"res-web", url:"https://www.indiabix.com/online-test/"},
+          {label:"AMCAT Practice", type:"res-web", url:"https://www.myamcat.com/"}
+        ]
+      },
+      {
+        time: "10:05 AM", dur: "30 min",
+        icon: "ti-analyze", name: "Mock test review",
+        desc: "Go through every wrong answer. Find patterns — which topic had most errors? Use Claude or ChatGPT to explain the concept behind each wrong answer.",
+        resources: [
+          {label:"Claude.ai for explanation", type:"res-web", url:"https://claude.ai"},
+          {label:"ChatGPT", type:"res-web", url:"https://chat.openai.com"}
+        ]
+      },
+      {
+        time: "10:40 AM", dur: "50 min",
+        icon: "ti-brain", name: "Logical Reasoning — Puzzles & Seating arrangement",
+        desc: "Linear and circular seating, blood relations, direction sense. These are high-scoring but need calm reading. 20 Qs.",
+        resources: [
+          {label:"IndiaBix Seating", type:"res-web", url:"https://www.indiabix.com/logical-reasoning/seating-arrangement/"},
+          {label:"YT: Seating arrangement tricks — Unacademy", type:"res-yt", url:"https://www.youtube.com/watch?v=BpEfGJn_7WE"},
+          {label:"PrepInsta Puzzles", type:"res-web", url:"https://prepinsta.com/logical-reasoning/"}
+        ]
+      },
+      {
+        time: "11:35 AM", dur: "40 min",
+        icon: "ti-code", name: "LeetCode — 2 Easy problems (timed)",
+        desc: "Try solving each problem in under 15 minutes. #136 Single Number, #141 Linked List Cycle. After, compare your solution with optimal ones.",
+        resources: [
+          {label:"LeetCode Easy", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
+          {label:"YT: Single Number — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=qMPX1AOa83k"}
+        ]
+      }
+    ],
+    tip: "Mock test mindset: Your score on Day 6 doesn't matter. What matters is finding your weak spots early. A student who scores 50% on Day 6 and reviews thoroughly will beat someone who scored 80% and moved on."
+  }
+];
+
+const tagColors = { "tag-gh": "tag-gh", "tag-ai": "tag-ai", "tag-lc": "tag-lc", "tag-apt": "tag-apt" };
+const tagNames = { "tag-gh": "GitHub", "tag-ai": "AI Tools", "tag-lc": "LeetCode", "tag-apt": "Aptitude" };
+
+let current = 0;
+
+function renderNav() {
+  const nav = document.getElementById('dayNav');
+  nav.innerHTML = days.map((d,i) =>
+    `<button class="day-btn${i===current?' active':''}" onclick="switchDay(${i})">Day ${d.day}</button>`
+  ).join('');
+}
+
+function renderCard() {
+  const d = days[current];
+  const card = document.getElementById('dayCard');
+  let slotsHTML = d.slots.map(s => `
+    <div class="slot">
+      <div class="slot-time">
+        <p class="time">${s.time}</p>
+        <p class="dur">${s.dur}</p>
+      </div>
+      <div class="slot-content">
+        <div class="slot-label">
+          <i class="ti ${s.icon} slot-icon" aria-hidden="true"></i>
+          <span class="slot-name">${s.name}</span>
+        </div>
+        <p class="slot-desc">${s.desc}</p>
+        <div class="res-row">
+          ${s.resources.map(r => `<a href="${r.url}" class="res-link ${r.type}" target="_blank">${r.label}</a>`).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  card.innerHTML = `
+    <div class="day-header">
+      <p class="day-title">Day ${d.day} — ${d.title}</p>
+      <p class="day-subtitle">${d.subtitle}</p>
+      <div class="tag-row" style="margin-top:7px">
+        ${d.tags.map((t,i) => `<span class="tag ${t}">${d.tagLabels[i]}</span>`).join('')}
+      </div>
+    </div>
+    <div class="day-body">${slotsHTML}</div>
+    <div class="tip-box">
+      <p class="tip-label"><i class="ti ti-bulb" aria-hidden="true" style="margin-right:3px;font-size:12px"></i> Dean's tip</p>
+      <p class="tip-text">${d.tip}</p>
+    </div>
+  `;
+}
+
+function switchDay(i) {
+  current = i;
+  renderNav();
+  renderCard();
+}
+
+renderNav();
+renderCard();
+</script>
