@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech Interview Prep — Placement Prep 2026</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #181b24;
+      --surface2: #1f2430;
+      --border: #2a3142;
+      --text: #e8eaef;
+      --muted: #8b93a7;
+      --accent: #6c9eff;
+      --accent-dim: rgba(108, 158, 255, 0.15);
+      --green: #3dd68c;
+      --green-dim: rgba(61, 214, 140, 0.12);
+      --orange: #f5a623;
+      --orange-dim: rgba(245, 166, 35, 0.12);
+      --purple: #b794f6;
+      --purple-dim: rgba(183, 148, 246, 0.12);
+      --pink: #f687b3;
+      --pink-dim: rgba(246, 135, 179, 0.12);
+      --radius: 12px;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 80% -10%, rgba(183, 148, 246, 0.1), transparent),
+        radial-gradient(ellipse 60% 40% at 10% 100%, rgba(108, 158, 255, 0.1), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
+    }
+
+    .top-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .top-nav a {
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .top-nav a:hover {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+
+    header h1 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      max-width: 640px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: var(--purple-dim);
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+
+    .section-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 24px 0 20px;
+      padding: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .section-tab {
+      font-family: inherit;
+      font-size: 0.78rem;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .section-tab:hover { color: var(--text); background: var(--surface2); }
+    .section-tab.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(108, 158, 255, 0.35);
+    }
+
+    .panel { display: none; animation: fadeIn 0.3s ease; }
+    .panel.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin: 14px 0 8px;
+      color: var(--accent);
+    }
+
+    .card p, .card li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .card ul, .card ol {
+      margin-left: 18px;
+      margin-top: 8px;
+    }
+
+    .card li { margin-bottom: 6px; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .company-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .company-card h3 {
+      font-size: 0.9rem;
+      margin: 0 0 6px;
+      color: var(--text);
+    }
+
+    .company-card .type {
+      font-size: 0.7rem;
+      color: var(--purple);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .company-card p {
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+    }
+
+    .company-card ul {
+      margin-left: 16px;
+      font-size: 0.78rem;
+    }
+
+    .res-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .res-link {
+      font-size: 0.72rem;
+      padding: 5px 11px;
+      border-radius: 99px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.15s;
+    }
+
+    .res-link:hover { transform: translateY(-1px); }
+
+    .res-dsa { background: var(--green-dim); color: var(--green); }
+    .res-cs { background: var(--purple-dim); color: var(--purple); }
+    .res-yt { background: #3d1f1f; color: #f8a0a0; }
+    .res-web { background: #1a2d4a; color: #8ec5ff; }
+    .res-mock { background: var(--orange-dim); color: var(--orange); }
+    .res-book { background: var(--pink-dim); color: var(--pink); }
+    .res-company { background: var(--accent-dim); color: var(--accent); }
+
+    .phase-row {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .phase-row:last-child { border-bottom: none; }
+
+    .phase-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border-radius: 8px;
+      padding: 8px;
+      text-align: center;
+      height: fit-content;
+    }
+
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 0;
+    }
+
+    .steps li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .steps li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin-top: 10px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .checklist-box {
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 12px;
+    }
+
+    .checklist-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      margin-bottom: 4px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.84rem;
+      user-select: none;
+    }
+
+    .check-item:hover { background: rgba(255, 255, 255, 0.03); }
+    .check-item.checked { opacity: 0.7; }
+    .check-item.checked .check-text { text-decoration: line-through; color: var(--muted); }
+
+    .check-box {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      margin-top: 2px;
+    }
+
+    .check-item.checked .check-box {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .check-item.checked .check-box::after {
+      content: "✓";
+      display: block;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #0f1117;
+      line-height: 14px;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: var(--orange);
+      background: var(--orange-dim);
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-top: 16px;
+    }
+
+    footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <nav class="top-nav">
+      <a href="index.html">&larr; Back to 60-Day Plan</a>
+      <a href="https://github.com/tapasbadal/Placement-Preparation-Plan-Summer-" target="_blank" rel="noopener">GitHub Repo</a>
+    </nav>
+
+    <header>
+      <span class="badge">Standalone module</span>
+      <h1>Tech Company Interview Preparation</h1>
+      <p>Resources, roadmaps, and checklists for product companies, startups, and IT services. This page will be linked into the weekly plan later.</p>
+    </header>
+
+    <div class="section-tabs" id="sectionTabs" role="tablist">
+      <button class="section-tab active" type="button" data-panel="roadmap">Roadmap</button>
+      <button class="section-tab" type="button" data-panel="dsa">DSA &amp; Coding</button>
+      <button class="section-tab" type="button" data-panel="cs">CS Fundamentals</button>
+      <button class="section-tab" type="button" data-panel="companies">Company Types</button>
+      <button class="section-tab" type="button" data-panel="rounds">Interview Rounds</button>
+      <button class="section-tab" type="button" data-panel="mock">Mock &amp; Practice</button>
+      <button class="section-tab" type="button" data-panel="checklist">Master Checklist</button>
+    </div>
+
+    <!-- ROADMAP -->
+    <section class="panel active" id="panel-roadmap" role="tabpanel">
+      <div class="card">
+        <h2>12-Week Technical Interview Roadmap</h2>
+        <p>Align this with your 60-day summer plan. Weeks 1–4 overlap with GitHub + LeetCode basics; weeks 5–12 add depth and mocks.</p>
+
+        <div class="phase-row">
+          <div class="phase-num">Wk 1–4</div>
+          <div>
+            <strong>Foundations</strong>
+            <p>2 LeetCode Easy/day, aptitude 15–25 Qs/day, Git daily commits, 1 CS topic/week (OOP or DBMS intro).</p>
+            <div class="res-grid">
+              <a class="res-link res-dsa" href="https://leetcode.com/problemset/?difficulty=EASY" target="_blank" rel="noopener">LeetCode Easy</a>
+              <a class="res-link res-web" href="https://www.indiabix.com/aptitude/" target="_blank" rel="noopener">IndiaBIX Aptitude</a>
+              <a class="res-link res-dsa" href="https://neetcode.io/practice" target="_blank" rel="noopener">NeetCode Practice</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-row">
+          <div class="phase-num">Wk 5–8</div>
+          <div>
+            <strong>Patterns &amp; depth</strong>
+            <p>Move to Medium problems. Cover arrays, strings, hashing, two pointers, stacks, trees, graphs. Build 1 strong project.</p>
+            <div class="res-grid">
+              <a class="res-link res-dsa" href="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2" target="_blank" rel="noopener">Striver A2Z Sheet</a>
+              <a class="res-link res-yt" href="https://www.youtube.com/@NeetCode" target="_blank" rel="noopener">NeetCode YouTube</a>
+              <a class="res-link res-cs" href="https://www.youtube.com/@GateSmashers" target="_blank" rel="noopener">Gate Smashers</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-row">
+          <div class="phase-num">Wk 9–12</div>
+          <div>
+            <strong>Interview simulation</strong>
+            <p>Timed 2-problem mocks, HR + project stories, company-specific revision, weak-topic review.</p>
+            <div class="res-grid">
+              <a class="res-link res-mock" href="https://www.pramp.com/" target="_blank" rel="noopener">Pramp Mock Interviews</a>
+              <a class="res-link res-mock" href="https://leetcode.com/interview/" target="_blank" rel="noopener">LeetCode Mock</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Weekly study split (suggested)</h2>
+        <table>
+          <thead>
+            <tr><th>Day</th><th>Focus</th><th>Hours</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mon–Thu</td><td>2 LeetCode + aptitude + 1 CS topic</td><td>3–4</td></tr>
+            <tr><td>Friday</td><td>Project / GitHub + resume bullet</td><td>2–3</td></tr>
+            <tr><td>Saturday</td><td>Full mock (aptitude + 2 coding timed)</td><td>3</td></tr>
+            <tr><td>Sunday</td><td>Review mistakes + revision notes</td><td>2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- DSA -->
+    <section class="panel" id="panel-dsa" role="tabpanel">
+      <div class="card">
+        <h2>Data Structures &amp; Algorithms</h2>
+        <p>Target: 150–200 problems for product companies; 80–100 for mass IT recruiters (mostly Easy + selected Medium).</p>
+        <h3>Topic order</h3>
+        <ol>
+          <li>Arrays, strings, hashing</li>
+          <li>Two pointers, sliding window</li>
+          <li>Stacks, queues, linked lists</li>
+          <li>Trees, BST, traversals</li>
+          <li>Graphs (BFS, DFS)</li>
+          <li>Dynamic programming (last)</li>
+        </ol>
+        <div class="res-grid">
+          <a class="res-link res-dsa" href="https://leetcode.com/" target="_blank" rel="noopener">LeetCode</a>
+          <a class="res-link res-dsa" href="https://neetcode.io/roadmap" target="_blank" rel="noopener">NeetCode Roadmap</a>
+          <a class="res-link res-dsa" href="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2" target="_blank" rel="noopener">Striver A2Z DSA</a>
+          <a class="res-link res-dsa" href="https://algo.monster/" target="_blank" rel="noopener">AlgoMonster Patterns</a>
+          <a class="res-link res-yt" href="https://www.youtube.com/playlist?list=PLot-Xpze53ldKo8DjLlCJyRPqf2cgyHro" target="_blank" rel="noopener">NeetCode Playlist</a>
+          <a class="res-link res-yt" href="https://www.youtube.com/@takeUforward" target="_blank" rel="noopener">take U forward</a>
+          <a class="res-link res-book" href="https://www.crackingthecodinginterview.com/" target="_blank" rel="noopener">Cracking the Coding Interview</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>How to solve a coding interview question</h2>
+        <ol class="steps">
+          <li>Clarify inputs, outputs, edge cases, and constraints.</li>
+          <li>Describe brute force and its time/space complexity.</li>
+          <li>Optimize (pattern recognition) and get interviewer buy-in.</li>
+          <li>Code cleanly; use meaningful variable names.</li>
+          <li>Walk through a sample test case.</li>
+          <li>State final complexity and trade-offs.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>SQL (very common in startups &amp; services)</h2>
+        <p>Practice SELECT, WHERE, JOIN, GROUP BY, HAVING, subqueries, window functions basics.</p>
+        <div class="res-grid">
+          <a class="res-link res-dsa" href="https://leetcode.com/problemset/database/" target="_blank" rel="noopener">LeetCode SQL</a>
+          <a class="res-link res-web" href="https://www.hackerrank.com/domains/sql" target="_blank" rel="noopener">HackerRank SQL</a>
+          <a class="res-link res-yt" href="https://www.youtube.com/watch?v=HXV3zeQKqGY" target="_blank" rel="noopener">SQL Tutorial — freeCodeCamp</a>
+          <a class="res-link res-web" href="https://sqlbolt.com/" target="_blank" rel="noopener">SQLBolt</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CS FUNDAMENTALS -->
+    <section class="panel" id="panel-cs" role="tabpanel">
+      <div class="card">
+        <h2>Core CS subjects (Round 2 &amp; HR+Tech)</h2>
+        <p>Most service companies and many product firms ask theory alongside coding.</p>
+
+        <h3>Operating Systems</h3>
+        <p>Process vs thread, scheduling, deadlock, memory (paging), synchronization.</p>
+        <div class="res-grid">
+          <a class="res-link res-cs" href="https://www.youtube.com/playlist?list=PLqM7alHKeFerHLF8cBTsMTg6Rq8fMJlGi" target="_blank" rel="noopener">Gate Smashers OS</a>
+          <a class="res-link res-yt" href="https://www.youtube.com/watch?v=vBURTt97KqM" target="_blank" rel="noopener">Neso Academy OS</a>
+          <a class="res-link res-book" href="https://www.os-book.com/OS10/index.html" target="_blank" rel="noopener">OSTEP (free book)</a>
+        </div>
+
+        <h3>DBMS</h3>
+        <p>ACID, normalization, keys, indexing, joins, transactions.</p>
+        <div class="res-grid">
+          <a class="res-link res-cs" href="https://www.youtube.com/playlist?list=PLxCzCOWd7aoFykEjtjIsEhH82Bml_xZ9j" target="_blank" rel="noopener">Gate Smashers DBMS</a>
+          <a class="res-link res-web" href="https://www.geeksforgeeks.org/dbms/" target="_blank" rel="noopener">GFG DBMS</a>
+        </div>
+
+        <h3>Computer Networks</h3>
+        <p>OSI/TCP-IP, HTTP/HTTPS, DNS, TCP vs UDP, REST basics.</p>
+        <div class="res-grid">
+          <a class="res-link res-cs" href="https://www.youtube.com/@GateSmashers" target="_blank" rel="noopener">Gate Smashers CN</a>
+          <a class="res-link res-yt" href="https://www.youtube.com/watch?v=qiQR5rTSshw" target="_blank" rel="noopener">HTTP Crash Course</a>
+        </div>
+
+        <h3>OOP &amp; System design (intro)</h3>
+        <p>Encapsulation, inheritance, polymorphism; SOLID at a high level. For senior roles: scalability basics.</p>
+        <div class="res-grid">
+          <a class="res-link res-cs" href="https://www.youtube.com/@AbdulBari" target="_blank" rel="noopener">Abdul Bari (DSA/OOP)</a>
+          <a class="res-link res-web" href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">System Design Primer</a>
+          <a class="res-link res-yt" href="https://www.youtube.com/@NeetCodeIO" target="_blank" rel="noopener">NeetCode IO (design)</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPANIES -->
+    <section class="panel" id="panel-companies" role="tabpanel">
+      <div class="card">
+        <h2>Preparation by company category</h2>
+        <div class="grid-2">
+          <div class="company-card">
+            <div class="type">Product / Big Tech</div>
+            <h3>Google, Microsoft, Amazon, Adobe, Flipkart</h3>
+            <p>Heavy DSA (Medium), OOP, system design (intern/full-time), behavioral.</p>
+            <ul>
+              <li>150+ LeetCode, focus Medium</li>
+              <li>Amazon: Leadership Principles</li>
+              <li>Strong project narrative</li>
+            </ul>
+            <div class="res-grid">
+              <a class="res-link res-company" href="https://www.amazon.jobs/en/principles" target="_blank" rel="noopener">Amazon LP</a>
+              <a class="res-link res-company" href="https://leetcode.com/company/google/" target="_blank" rel="noopener">LeetCode Google</a>
+            </div>
+          </div>
+
+          <div class="company-card">
+            <div class="type">IT Services</div>
+            <h3>TCS, Infosys, Wipro, Cognizant, Capgemini</h3>
+            <p>Aptitude + verbal + easy coding + pseudo-code + HR.</p>
+            <ul>
+              <li>High aptitude volume</li>
+              <li>Basic C/Java/Python</li>
+              <li>Previous year papers</li>
+            </ul>
+            <div class="res-grid">
+              <a class="res-link res-company" href="https://prepinsta.com/" target="_blank" rel="noopener">PrepInsta</a>
+              <a class="res-link res-company" href="https://www.indiabix.com/online-test/" target="_blank" rel="noopener">IndiaBIX Tests</a>
+            </div>
+          </div>
+
+          <div class="company-card">
+            <div class="type">Startups / FinTech</div>
+            <h3>Razorpay, PhonePe, Swiggy, Zomato, Paytm</h3>
+            <p>DSA + stack depth + live project discussion + sometimes take-home.</p>
+            <ul>
+              <li>Know your stack end-to-end</li>
+              <li>2–3 deployed projects</li>
+              <li>API + DB design</li>
+            </ul>
+            <div class="res-grid">
+              <a class="res-link res-company" href="https://leetcode.com/company/" target="_blank" rel="noopener">LeetCode Company Tags</a>
+            </div>
+          </div>
+
+          <div class="company-card">
+            <div class="type">Core / Semiconductor</div>
+            <h3>Intel, Qualcomm, Texas Instruments</h3>
+            <p>C/C++, pointers, OS basics, aptitude; domain questions for ECE/EEE.</p>
+            <ul>
+              <li>C/C++ mastery</li>
+              <li>Digital logic / embedded basics</li>
+            </ul>
+            <div class="res-grid">
+              <a class="res-link res-web" href="https://www.geeksforgeeks.org/c-plus-plus/" target="_blank" rel="noopener">GFG C++</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Company research before interview</h2>
+        <ul>
+          <li>Read 5–10 recent interview experiences (Glassdoor, AmbitionBox, LeetCode Discuss).</li>
+          <li>Know 2 products/services the company offers.</li>
+          <li>Prepare &ldquo;Why this company?&rdquo; in 3 sentences.</li>
+        </ul>
+        <div class="res-grid">
+          <a class="res-link res-company" href="https://www.glassdoor.co.in/" target="_blank" rel="noopener">Glassdoor</a>
+          <a class="res-link res-company" href="https://www.ambitionbox.com/" target="_blank" rel="noopener">AmbitionBox</a>
+          <a class="res-link res-company" href="https://leetcode.com/discuss/interview-experience" target="_blank" rel="noopener">LeetCode Experiences</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROUNDS -->
+    <section class="panel" id="panel-rounds" role="tabpanel">
+      <div class="card">
+        <h2>Typical technical interview flow</h2>
+        <table>
+          <thead>
+            <tr><th>Round</th><th>What happens</th><th>How to prepare</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Online test</td>
+              <td>Aptitude + 1–2 coding (sometimes MCQ CS)</td>
+              <td>Timed mocks, IndiaBIX, CodeChef practice</td>
+            </tr>
+            <tr>
+              <td>Technical 1</td>
+              <td>DSA live coding, complexity analysis</td>
+              <td>NeetCode patterns, explain aloud while coding</td>
+            </tr>
+            <tr>
+              <td>Technical 2</td>
+              <td>CS theory, project deep dive</td>
+              <td>OS/DBMS notes, rehearse project architecture</td>
+            </tr>
+            <tr>
+              <td>HR / Manager</td>
+              <td>Behavioral, salary, relocation</td>
+              <td>STAR stories, &ldquo;Tell me about yourself&rdquo; (2 min)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Project interview prep</h2>
+        <p>Be ready to answer in 5 minutes:</p>
+        <ul>
+          <li>What problem does it solve?</li>
+          <li>Tech stack and why you chose it</li>
+          <li>Database schema or API design</li>
+          <li>Hardest bug and how you fixed it</li>
+          <li>What you would improve with more time</li>
+        </ul>
+        <div class="res-grid">
+          <a class="res-link res-web" href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener">Markdown for README</a>
+          <a class="res-link res-web" href="https://docs.github.com/en/pages" target="_blank" rel="noopener">GitHub Pages (demo)</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Resume &amp; communication</h2>
+        <ul>
+          <li>One-page resume: projects &gt; skills list &gt; grades</li>
+          <li>GitHub link with green contribution graph</li>
+          <li>Practice 2-min self-intro and each project in 90 seconds</li>
+        </ul>
+        <div class="res-grid">
+          <a class="res-link res-web" href="https://www.overleaf.com/latex/templates/tagged/cv" target="_blank" rel="noopener">Overleaf CV Templates</a>
+          <a class="res-link res-yt" href="https://www.youtube.com/results?search_query=technical+interview+tell+me+about+yourself" target="_blank" rel="noopener">Tell Me About Yourself</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOCK -->
+    <section class="panel" id="panel-mock" role="tabpanel">
+      <div class="card">
+        <h2>Mock interviews &amp; timed practice</h2>
+        <p>Start mocks only after ~40–50 problems. Simulate real conditions: no autocomplete, explain thinking, 45–60 min for 2 problems.</p>
+        <div class="res-grid">
+          <a class="res-link res-mock" href="https://www.pramp.com/" target="_blank" rel="noopener">Pramp (free peer)</a>
+          <a class="res-link res-mock" href="https://leetcode.com/interview/" target="_blank" rel="noopener">LeetCode Mock</a>
+          <a class="res-link res-mock" href="https://www.interviewing.io/" target="_blank" rel="noopener">interviewing.io</a>
+          <a class="res-link res-mock" href="https://www.hackerrank.com/interview/interview-preparation-kit" target="_blank" rel="noopener">HackerRank Interview Kit</a>
+          <a class="res-link res-web" href="https://www.codechef.com/practice" target="_blank" rel="noopener">CodeChef Practice</a>
+          <a class="res-link res-web" href="https://codeforces.com/problemset" target="_blank" rel="noopener">Codeforces</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Aptitude for technical drives</h2>
+        <p>Many students fail online aptitude before coding rounds. Keep daily practice even while doing DSA.</p>
+        <div class="res-grid">
+          <a class="res-link res-web" href="https://www.indiabix.com/" target="_blank" rel="noopener">IndiaBIX</a>
+          <a class="res-link res-web" href="https://prepinsta.com/" target="_blank" rel="noopener">PrepInsta</a>
+          <a class="res-link res-web" href="https://www.mymocktest.com/" target="_blank" rel="noopener">Mock Tests</a>
+          <a class="res-link res-yt" href="https://www.youtube.com/@Padhle" target="_blank" rel="noopener">Padhle Aptitude</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>AI tools for interview prep</h2>
+        <p>Use AI to review solutions and generate follow-up questions — not to skip thinking.</p>
+        <div class="res-grid">
+          <a class="res-link res-web" href="https://docs.cursor.com/" target="_blank" rel="noopener">Cursor IDE</a>
+          <a class="res-link res-web" href="https://claude.ai/" target="_blank" rel="noopener">Claude</a>
+          <a class="res-link res-web" href="https://chat.openai.com/" target="_blank" rel="noopener">ChatGPT</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MASTER CHECKLIST -->
+    <section class="panel" id="panel-checklist" role="tabpanel">
+      <div class="card">
+        <h2>Technical interview master checklist</h2>
+        <p>Track readiness before campus drives. Progress saves in your browser.</p>
+        <div class="checklist-box" id="masterChecklist"></div>
+        <div class="note">Tip: Integrate items from this checklist into your weekly plan in index.html when Week 2+ is published.</div>
+      </div>
+    </section>
+
+    <footer>
+      <a href="index.html">60-Day Plan</a> &middot;
+      <a href="https://github.com/tapasbadal/Placement-Preparation-Plan-Summer-" target="_blank" rel="noopener">GitHub</a>
+    </footer>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "placement-interview-checklist-v1";
+
+    const masterItems = [
+      "Solved 50+ LeetCode problems with understood patterns (not memorized).",
+      "Completed at least one timed mock (2 problems in 60 minutes).",
+      "Can explain 2 projects: problem, stack, DB/API, and one bug fix.",
+      "OS basics: process vs thread, deadlock, memory management.",
+      "DBMS basics: ACID, normalization, indexing, JOIN types.",
+      "Networks: HTTP vs HTTPS, REST, TCP vs UDP.",
+      "SQL: written 10+ queries including JOIN and GROUP BY.",
+      "Resume one page; GitHub profile README and active commits.",
+      "Prepared 2-min 'Tell me about yourself' and 'Why this company'.",
+      "Practiced 5 aptitude mocks (40 Q, 40 min) with 70%+ accuracy.",
+      "Reviewed 10+ interview experiences for target companies.",
+      "Whiteboard/paper coding: solved 5 problems without IDE autocomplete."
+    ];
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function loadChecks() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const arr = JSON.parse(raw);
+          if (Array.isArray(arr) && arr.length === masterItems.length) {
+            return arr.map(Boolean);
+          }
+        }
+      } catch (_) {}
+      return masterItems.map(() => false);
+    }
+
+    function saveChecks(state) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (_) {}
+    }
+
+    let checked = loadChecks();
+
+    function renderChecklist() {
+      const box = document.getElementById("masterChecklist");
+      const done = checked.filter(Boolean).length;
+      box.innerHTML =
+        '<div class="checklist-title">Readiness (' + done + "/" + masterItems.length + ")</div>" +
+        '<ul style="list-style:none">' +
+        masterItems
+          .map(
+            (text, i) =>
+              '<li class="check-item' +
+              (checked[i] ? " checked" : "") +
+              '" data-idx="' +
+              i +
+              '"><div class="check-box"></div><span class="check-text">' +
+              escapeHtml(text) +
+              "</span></li>"
+          )
+          .join("") +
+        "</ul>";
+
+      box.querySelectorAll(".check-item").forEach((el) => {
+        el.addEventListener("click", () => {
+          const i = Number(el.dataset.idx);
+          checked[i] = !checked[i];
+          saveChecks(checked);
+          renderChecklist();
+        });
+      });
+    }
+
+    document.querySelectorAll(".section-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".section-tab").forEach((t) => t.classList.remove("active"));
+        document.querySelectorAll(".panel").forEach((p) => p.classList.remove("active"));
+        tab.classList.add("active");
+        document.getElementById("panel-" + tab.dataset.panel).classList.add("active");
+      });
+    });
+
+    renderChecklist();
+  </script>
+</body>
+</html>
