@@ -1,6 +1,11 @@
-
 <style>
 .wrap { padding: 1rem 0; font-size: 14px; color: var(--color-text-primary); }
+/* Week Navigation Styles */
+.week-nav { display: flex; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid var(--color-border-tertiary); padding-bottom: 10px; }
+.week-btn { font-size: 13px; padding: 6px 14px; border: 1px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); background: transparent; color: var(--color-text-secondary); cursor: pointer; transition: all .15s; font-weight: 500; }
+.week-btn:hover { background: var(--color-background-secondary); color: var(--color-text-primary); }
+.week-btn.active { background: var(--color-background-secondary); border-color: var(--color-border-primary); color: var(--color-text-primary); box-shadow: inset 0 -2px 0 var(--color-border-primary); }
+
 .day-nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
 .day-btn { font-size: 12px; padding: 5px 10px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); background: transparent; color: var(--color-text-secondary); cursor: pointer; transition: all .15s; }
 .day-btn:hover { background: var(--color-background-secondary); color: var(--color-text-primary); }
@@ -36,6 +41,7 @@
 .tag-lc { background: #EAF3DE; color: #27500A; }
 .tag-apt { background: #FAEEDA; color: #633806; }
 </style>
+
 <h2 class="sr-only">60-day summer vacation daily plan for students covering GitHub, AI tools, LeetCode, and aptitude preparation</h2>
 <div class="wrap">
 
@@ -55,6 +61,15 @@
   <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;">
     <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:3px;">Aptitude Qs</div>
     <div style="font-size:18px;font-weight:500;">~1800</div>
+  </div>
+</div>
+
+<!-- Week Selection Layer -->
+<div style="margin-bottom:12px;">
+  <div style="font-size:11px;color:var(--color-text-tertiary);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;">Select Week</div>
+  <div class="week-nav" id="weekNav">
+    <button class="week-btn active" onclick="selectWeek(1)">Week 1</button>
+    <button class="week-btn" onclick="alert('Week 2 schedule coming soon!')" style="opacity:0.6; cursor:not-allowed;">Week 2</button>
   </div>
 </div>
 
@@ -106,12 +121,12 @@ const days = [
         ]
       }
     ],
-    tip: "Day 1 tip: Don't rush the GitHub setup. A clean first repo with a proper README is more valuable than speed. Use your college email to unlock GitHub Student Developer Pack (free tools)."
+    tip: "Day 1 tip: Don't rush the GitHub setup. A clean first repo with a proper README is more valuable than speed."
   },
   {
     day: 2,
-    title: "Git workflow + AI Tool #1: ChatGPT / Claude",
-    subtitle: "Learn branching, commit messages. Explore AI tools for learning.",
+    title: "Git workflow + AI Tool #1: Cursor IDE",
+    subtitle: "Learn branching, commit messages. Explore advanced multi-file AI editing and Vibe Coding.",
     tags: ["tag-gh","tag-ai"],
     tagLabels: ["GitHub","AI Tools"],
     slots: [
@@ -127,12 +142,13 @@ const days = [
       },
       {
         time: "10:00 AM", dur: "50 min",
-        icon: "ti-robot", name: "AI Tool #1 — ChatGPT / Claude for studying",
-        desc: "Learn how to use AI to explain concepts, generate practice questions, debug code, and summarize topics. Practice prompting techniques.",
+        icon: "ti-cpu", name: "AI Tool #1 — Cursor IDE, Composer, & Agent Workflows",
+        desc: "Download and set up Cursor. Master the core commands: Ctrl+K for direct inline edits, Ctrl+L for context chat window, and Ctrl+I for Composer/Agent mode to modify multi-file system directories seamlessly via pure language.",
         resources: [
-          {label:"ChatGPT", type:"res-web", url:"https://chat.openai.com"},
-          {label:"Claude.ai", type:"res-web", url:"https://claude.ai"},
-          {label:"YT: ChatGPT for students — TechWithTim", type:"res-yt", url:"https://www.youtube.com/watch?v=JTxsNm9IdYU"}
+          {label:"Docs: Cursor Official Features Guide", type:"res-web", url:"https://docs.cursor.com/"},
+          {label:"YT: Master Cursor 2.0 (80/20 Rule) — Dr. Alex Young", type:"res-yt", url:"https://www.youtube.com/watch?v=-PcOTX15geI"},
+          {label:"YT: Project-Based Cursor Tutorial — Mikey No-Code", type:"res-yt", url:"https://www.youtube.com/watch?v=oQDCAJnr1aU"},
+          {label:"Forum: Cursor Prompting Best Practices", type:"res-web", url:"https://forum.cursor.com/"}
         ]
       },
       {
@@ -154,14 +170,14 @@ const days = [
         ]
       }
     ],
-    tip: "AI tool tip: Use Claude or ChatGPT to explain any aptitude concept you don't understand — ask it to 'explain this like I'm in 1st year engineering, give 3 examples'. It's like having a tutor 24/7."
+    tip: "Cursor Tip: Use Composer Mode (Cmd+I) to generate entire front-end structures or boilerplate architectures rapidly. Always use @Files or @Folders within the chat to safely scope your repository context."
   },
   {
     day: 3,
-    title: "GitHub profile + AI Tool #2: Notion AI / Gamma",
-    subtitle: "Build your GitHub profile README. Learn AI for notes & presentations.",
-    tags: ["tag-gh","tag-ai"],
-    tagLabels: ["GitHub","AI Tools"],
+    title: "GitHub profile + Profile Redesign",
+    subtitle: "Build your GitHub profile README. Refine markdown styles.",
+    tags: ["tag-gh"],
+    tagLabels: ["GitHub"],
     slots: [
       {
         time: "9:00 AM", dur: "55 min",
@@ -174,17 +190,7 @@ const days = [
         ]
       },
       {
-        time: "10:00 AM", dur: "50 min",
-        icon: "ti-robot", name: "AI Tool #2 — Notion AI or Gamma.app",
-        desc: "Notion AI: create study notes, summarize topics automatically. Gamma.app: generate study presentations from text. Both free for students.",
-        resources: [
-          {label:"Notion AI", type:"res-web", url:"https://www.notion.so/product/ai"},
-          {label:"Gamma.app", type:"res-web", url:"https://gamma.app"},
-          {label:"YT: Notion AI for students", type:"res-yt", url:"https://www.youtube.com/watch?v=6bkGl6Q4hBY"}
-        ]
-      },
-      {
-        time: "11:00 AM", dur: "40 min",
+        time: "10:00 AM", dur: "40 min",
         icon: "ti-puzzle", name: "Aptitude — Ratio & Proportion basics",
         desc: "Ratios, proportion, direct/inverse variation, unitary method. 25 Qs from IndiaBix.",
         resources: [
@@ -194,7 +200,7 @@ const days = [
         ]
       },
       {
-        time: "11:45 AM", dur: "35 min",
+        time: "10:40 AM", dur: "35 min",
         icon: "ti-code", name: "LeetCode — 2 Easy problems",
         desc: "#21 Merge Two Sorted Lists, #26 Remove Duplicates. Focus on linked list / array basics.",
         resources: [
@@ -203,12 +209,12 @@ const days = [
         ]
       }
     ],
-    tip: "GitHub tip: Commit something every day — even just a small README update. Employers literally look at your GitHub activity graph (the green squares). A consistent streak from 2nd year is impressive."
+    tip: "GitHub tip: Commit something every day — even just a small README update. Employers literally look at your GitHub activity graph (the green squares)."
   },
   {
     day: 4,
-    title: "Git collaboration + AI Tool #3: GitHub Copilot",
-    subtitle: "Forks, issues, open source basics. AI-assisted coding with Copilot.",
+    title: "Git collaboration + AI Tool #2: Claude Code (CLI)",
+    subtitle: "Forks, open source basics. Run terminal-bound agentic tasks directly from your CLI.",
     tags: ["tag-gh","tag-ai","tag-lc"],
     tagLabels: ["GitHub","AI Tools","LeetCode"],
     slots: [
@@ -224,12 +230,13 @@ const days = [
       },
       {
         time: "10:00 AM", dur: "50 min",
-        icon: "ti-robot", name: "AI Tool #3 — GitHub Copilot",
-        desc: "Free for students. Install in VS Code. Learn how Copilot suggests code, completes functions, and explains errors. Practice using it with small programs.",
+        icon: "ti-terminal", name: "AI Tool #2 — Claude Code CLI Environment",
+        desc: "Install Anthropic's official command-line terminal agent loop. Learn to query files, execute programmatic git actions (`claude commit`), run complex testing scripts, and solve broken builds natively within your shell.",
         resources: [
-          {label:"GitHub Copilot Student", type:"res-web", url:"https://github.com/education/students"},
-          {label:"YT: GitHub Copilot tutorial — Fireship", type:"res-yt", url:"https://www.youtube.com/watch?v=hPVatUSvZq0"},
-          {label:"VS Code + Copilot setup", type:"res-web", url:"https://code.visualstudio.com/docs/copilot/overview"}
+          {label:"Docs: Official Claude Code Guide", type:"res-web", url:"https://docs.anthropic.com/en/docs/agents-and-tools/claude-code"},
+          {label:"NPM: @anthropic-ai/claude-code Package", type:"res-web", url:"https://www.npmjs.com/package/@anthropic-ai/claude-code"},
+          {label:"YT: Claude Code Setup & First Run — Continuous Tech", type:"res-yt", url:"https://www.youtube.com/search?q=claude+code+cli+tutorial"},
+          {label:"Anthropic: Agentic CLI Command Reference", type:"res-web", url:"https://docs.anthropic.com/en/docs/agents-and-tools/claude-code#available-commands"}
         ]
       },
       {
@@ -252,7 +259,7 @@ const days = [
         ]
       }
     ],
-    tip: "Copilot tip: Don't let Copilot write everything for you — use it to check your logic, not replace it. Type the problem logic yourself first, then see how Copilot would do it differently. That comparison is where learning happens."
+    tip: "Claude Code CLI Tip: Leverage your terminal agent loop to automatically inspect error stacks or logs. You can pipe error states straight into the tool for lightning-fast environment debugging."
   },
   {
     day: 5,
@@ -300,7 +307,7 @@ const days = [
         ]
       }
     ],
-    tip: "Review tip: Look back at Day 1–4. Can you create a new GitHub repo from scratch without notes? Can you explain to a friend what ChatGPT and Copilot do differently? If yes, you've genuinely learned it."
+    tip: "Review tip: Look back at Day 1–4. Can you explain the practical layout differences between using Cursor's Composer and running commands inside Claude Code CLI?"
   },
   {
     day: 6,
@@ -315,16 +322,16 @@ const days = [
         desc: "Take a full 40-question timed test on PrepInsta or IndiaBix covering: percentages, ratio, SI/CI, time & work. Set a 40-minute timer. No help allowed.",
         resources: [
           {label:"PrepInsta Mock Test", type:"res-web", url:"https://prepinsta.com/aptitude/"},
-          {label:"IndiaBix Full Test", type:"res-web", url:"https://www.indiabix.com/online-test/"},
+          {label:"IndiaBix Full Test", type:"res-web", url:"https://www.online-test.com/"},
           {label:"AMCAT Practice", type:"res-web", url:"https://www.myamcat.com/"}
         ]
       },
       {
         time: "10:05 AM", dur: "30 min",
         icon: "ti-analyze", name: "Mock test review",
-        desc: "Go through every wrong answer. Find patterns — which topic had most errors? Use Claude or ChatGPT to explain the concept behind each wrong answer.",
+        desc: "Go through every wrong answer. Find patterns — which topic had most errors? Use your AI tools to check optimization workflows.",
         resources: [
-          {label:"Claude.ai for explanation", type:"res-web", url:"https://claude.ai"},
+          {label:"Claude.ai", type:"res-web", url:"https://claude.ai"},
           {label:"ChatGPT", type:"res-web", url:"https://chat.openai.com"}
         ]
       },
@@ -348,14 +355,19 @@ const days = [
         ]
       }
     ],
-    tip: "Mock test mindset: Your score on Day 6 doesn't matter. What matters is finding your weak spots early. A student who scores 50% on Day 6 and reviews thoroughly will beat someone who scored 80% and moved on."
+    tip: "Mock test mindset: Your score on Day 6 doesn't matter. What matters is finding your weak spots early."
   }
 ];
 
-const tagColors = { "tag-gh": "tag-gh", "tag-ai": "tag-ai", "tag-lc": "tag-lc", "tag-apt": "tag-apt" };
-const tagNames = { "tag-gh": "GitHub", "tag-ai": "AI Tools", "tag-lc": "LeetCode", "tag-apt": "Aptitude" };
-
 let current = 0;
+
+function selectWeek(weekNum) {
+  if(weekNum === 1) {
+    current = 0;
+    renderNav();
+    renderCard();
+  }
+}
 
 function renderNav() {
   const nav = document.getElementById('dayNav');
@@ -396,7 +408,7 @@ function renderCard() {
     </div>
     <div class="day-body">${slotsHTML}</div>
     <div class="tip-box">
-      <p class="tip-label"><i class="ti ti-bulb" aria-hidden="true" style="margin-right:3px;font-size:12px"></i> Dean's tip</p>
+      <p class="tip-label"><i class="ti ti-bulb" aria-hidden="true" style="margin-right:3px;font-size:12px"></i> Advisor's Tip</p>
       <p class="tip-text">${d.tip}</p>
     </div>
   `;
@@ -408,6 +420,7 @@ function switchDay(i) {
   renderCard();
 }
 
+// Initial Run
 renderNav();
 renderCard();
 </script>
