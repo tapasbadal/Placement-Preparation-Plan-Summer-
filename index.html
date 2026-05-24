@@ -1,426 +1,1114 @@
-<style>
-.wrap { padding: 1rem 0; font-size: 14px; color: var(--color-text-primary); }
-/* Week Navigation Styles */
-.week-nav { display: flex; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid var(--color-border-tertiary); padding-bottom: 10px; }
-.week-btn { font-size: 13px; padding: 6px 14px; border: 1px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); background: transparent; color: var(--color-text-secondary); cursor: pointer; transition: all .15s; font-weight: 500; }
-.week-btn:hover { background: var(--color-background-secondary); color: var(--color-text-primary); }
-.week-btn.active { background: var(--color-background-secondary); border-color: var(--color-border-primary); color: var(--color-text-primary); box-shadow: inset 0 -2px 0 var(--color-border-primary); }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Placement Prep 2026 — 60-Day Summer Plan</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #181b24;
+      --surface2: #1f2430;
+      --border: #2a3142;
+      --text: #e8eaef;
+      --muted: #8b93a7;
+      --accent: #6c9eff;
+      --accent-dim: rgba(108, 158, 255, 0.15);
+      --green: #3dd68c;
+      --green-dim: rgba(61, 214, 140, 0.12);
+      --orange: #f5a623;
+      --orange-dim: rgba(245, 166, 35, 0.12);
+      --purple: #b794f6;
+      --purple-dim: rgba(183, 148, 246, 0.12);
+      --radius: 12px;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    }
 
-.day-nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
-.day-btn { font-size: 12px; padding: 5px 10px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); background: transparent; color: var(--color-text-secondary); cursor: pointer; transition: all .15s; }
-.day-btn:hover { background: var(--color-background-secondary); color: var(--color-text-primary); }
-.day-btn.active { background: var(--color-background-secondary); border-color: var(--color-border-primary); color: var(--color-text-primary); font-weight: 500; }
-.day-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
-.day-header { padding: 14px 18px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); }
-.day-title { font-size: 16px; font-weight: 500; margin: 0 0 4px; }
-.day-subtitle { font-size: 12px; color: var(--color-text-secondary); margin: 0; }
-.day-body { padding: 0; }
-.slot { display: grid; grid-template-columns: 110px 1fr; border-bottom: 0.5px solid var(--color-border-tertiary); }
-.slot:last-child { border-bottom: none; }
-.slot-time { padding: 12px 14px; background: var(--color-background-secondary); border-right: 0.5px solid var(--color-border-tertiary); }
-.slot-time .time { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px; }
-.slot-time .dur { font-size: 11px; color: var(--color-text-tertiary); margin: 0; }
-.slot-content { padding: 12px 16px; }
-.slot-label { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
-.slot-icon { font-size: 15px; }
-.slot-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
-.slot-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; margin: 0 0 7px; }
-.res-row { display: flex; flex-wrap: wrap; gap: 5px; }
-.res-link { font-size: 11px; padding: 3px 8px; border-radius: 20px; text-decoration: none; font-weight: 500; }
-.res-yt { background: #FCEBEB; color: #791F1F; }
-.res-pdf { background: #FAEEDA; color: #633806; }
-.res-web { background: #E6F1FB; color: #0C447C; }
-.res-lc { background: #EAF3DE; color: #27500A; }
-.tip-box { margin: 14px 16px 14px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; }
-.tip-label { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: .05em; margin: 0 0 4px; }
-.tip-text { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; margin: 0; }
-.tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px; }
-.tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
-.tag-gh { background: #EEEDFE; color: #3C3489; }
-.tag-ai { background: #FBEAF0; color: #72243E; }
-.tag-lc { background: #EAF3DE; color: #27500A; }
-.tag-apt { background: #FAEEDA; color: #633806; }
-</style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-<h2 class="sr-only">60-day summer vacation daily plan for students covering GitHub, AI tools, LeetCode, and aptitude preparation</h2>
-<div class="wrap">
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
 
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px;">
-  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;">
-    <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:3px;">Duration</div>
-    <div style="font-size:18px;font-weight:500;">60 days</div>
-  </div>
-  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;">
-    <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:3px;">Daily study</div>
-    <div style="font-size:18px;font-weight:500;">3.5 hrs</div>
-  </div>
-  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;">
-    <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:3px;">LeetCode target</div>
-    <div style="font-size:18px;font-weight:500;">120 Qs</div>
-  </div>
-  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;">
-    <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:3px;">Aptitude Qs</div>
-    <div style="font-size:18px;font-weight:500;">~1800</div>
-  </div>
-</div>
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(108, 158, 255, 0.12), transparent),
+        radial-gradient(ellipse 60% 40% at 90% 100%, rgba(61, 214, 140, 0.08), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-<!-- Week Selection Layer -->
-<div style="margin-bottom:12px;">
-  <div style="font-size:11px;color:var(--color-text-tertiary);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;">Select Week</div>
-  <div class="week-nav" id="weekNav">
-    <button class="week-btn active" onclick="selectWeek(1)">Week 1</button>
-    <button class="week-btn" onclick="alert('Week 2 schedule coming soon!')" style="opacity:0.6; cursor:not-allowed;">Week 2</button>
-  </div>
-</div>
+    .app {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
+    }
 
-<div style="margin-bottom:14px;">
-  <div style="font-size:11px;color:var(--color-text-tertiary);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Select day</div>
-  <div class="day-nav" id="dayNav"></div>
-</div>
+    header {
+      margin-bottom: 28px;
+    }
 
-<div class="day-card" id="dayCard"></div>
+    header h1 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
 
-</div>
+    header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
 
-<script>
-const days = [
-  {
-    day: 1,
-    title: "Git & GitHub — absolute basics",
-    subtitle: "What is version control? Setting up GitHub account and first repo.",
-    tags: ["tag-gh"],
-    tagLabels: ["GitHub"],
-    slots: [
-      {
-        time: "9:00 AM", dur: "60 min",
-        icon: "ti-brand-github", name: "GitHub setup & concepts",
-        desc: "Watch intro video. Create GitHub account. Understand: repo, commit, push, pull. Install Git on your laptop.",
-        resources: [
-          {label:"YT: Git & GitHub in 1hr — Apna College", type:"res-yt", url:"https://www.youtube.com/watch?v=Ez8F0nW6S-w"},
-          {label:"YT: GitHub for beginners — FreeCodeCamp", type:"res-yt", url:"https://www.youtube.com/watch?v=RGOj5yH7evk"},
-          {label:"Docs: GitHub Quickstart", type:"res-web", url:"https://docs.github.com/en/get-started/quickstart"}
-        ]
-      },
-      {
-        time: "10:15 AM", dur: "45 min",
-        icon: "ti-math-function", name: "Aptitude — Percentages basics",
-        desc: "Concept: percentage formulas, percentage increase/decrease, back-calculation. Solve 25 questions.",
-        resources: [
-          {label:"IndiaBix Percentages", type:"res-web", url:"https://www.indiabix.com/aptitude/percentage/"},
-          {label:"YT: Percentages shortcuts — Padhle", type:"res-yt", url:"https://www.youtube.com/watch?v=CJcOz40-qlE"},
-          {label:"PrepInsta Practice", type:"res-web", url:"https://prepinsta.com/aptitude/percentage/"}
-        ]
-      },
-      {
-        time: "11:15 AM", dur: "40 min",
-        icon: "ti-code", name: "LeetCode — 2 Easy problems",
-        desc: "Problems: #1 Two Sum, #9 Palindrome Number. Read problem carefully, attempt, then study solution.",
-        resources: [
-          {label:"LeetCode Easy list", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
-          {label:"YT: Two Sum walkthrough — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=KLlXCFG5TnA"}
-        ]
-      }
-    ],
-    tip: "Day 1 tip: Don't rush the GitHub setup. A clean first repo with a proper README is more valuable than speed."
-  },
-  {
-    day: 2,
-    title: "Git workflow + AI Tool #1: Cursor IDE",
-    subtitle: "Learn branching, commit messages. Explore advanced multi-file AI editing and Vibe Coding.",
-    tags: ["tag-gh","tag-ai"],
-    tagLabels: ["GitHub","AI Tools"],
-    slots: [
-      {
-        time: "9:00 AM", dur: "50 min",
-        icon: "ti-brand-github", name: "Git branching & commit messages",
-        desc: "Learn: git branch, git checkout, git merge, pull requests. Create a branch in your repo and raise your first PR.",
-        resources: [
-          {label:"YT: Git Branching — Traversy Media", type:"res-yt", url:"https://www.youtube.com/watch?v=QV0kVNvkMxc"},
-          {label:"Interactive: Learn Git Branching", type:"res-web", url:"https://learngitbranching.js.org/"},
-          {label:"PDF: Git Cheat Sheet — GitHub", type:"res-pdf", url:"https://education.github.com/git-cheat-sheet-education.pdf"}
-        ]
-      },
-      {
-        time: "10:00 AM", dur: "50 min",
-        icon: "ti-cpu", name: "AI Tool #1 — Cursor IDE, Composer, & Agent Workflows",
-        desc: "Download and set up Cursor. Master the core commands: Ctrl+K for direct inline edits, Ctrl+L for context chat window, and Ctrl+I for Composer/Agent mode to modify multi-file system directories seamlessly via pure language.",
-        resources: [
-          {label:"Docs: Cursor Official Features Guide", type:"res-web", url:"https://docs.cursor.com/"},
-          {label:"YT: Master Cursor 2.0 (80/20 Rule) — Dr. Alex Young", type:"res-yt", url:"https://www.youtube.com/watch?v=-PcOTX15geI"},
-          {label:"YT: Project-Based Cursor Tutorial — Mikey No-Code", type:"res-yt", url:"https://www.youtube.com/watch?v=oQDCAJnr1aU"},
-          {label:"Forum: Cursor Prompting Best Practices", type:"res-web", url:"https://forum.cursor.com/"}
-        ]
-      },
-      {
-        time: "11:00 AM", dur: "40 min",
-        icon: "ti-math-function", name: "Aptitude — Percentages advanced",
-        desc: "Mixed percentage problems: successive % change, profit-loss link, population growth. Solve 25 Qs.",
-        resources: [
-          {label:"RS Aggarwal Ch.1 (PDF)", type:"res-pdf", url:"https://www.pdfdrive.com/rs-aggarwal-quantitative-aptitude-e9783548.html"},
-          {label:"IndiaBix Practice", type:"res-web", url:"https://www.indiabix.com/aptitude/percentage/"}
-        ]
-      },
-      {
-        time: "11:45 AM", dur: "35 min",
-        icon: "ti-code", name: "LeetCode — 2 Easy problems",
-        desc: "#13 Roman to Integer, #20 Valid Parentheses. Focus on string/array manipulation patterns.",
-        resources: [
-          {label:"LeetCode Easy", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
-          {label:"YT: Valid Parentheses — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=WTzjTskDFMg"}
-        ]
-      }
-    ],
-    tip: "Cursor Tip: Use Composer Mode (Cmd+I) to generate entire front-end structures or boilerplate architectures rapidly. Always use @Files or @Folders within the chat to safely scope your repository context."
-  },
-  {
-    day: 3,
-    title: "GitHub profile + Profile Redesign",
-    subtitle: "Build your GitHub profile README. Refine markdown styles.",
-    tags: ["tag-gh"],
-    tagLabels: ["GitHub"],
-    slots: [
-      {
-        time: "9:00 AM", dur: "55 min",
-        icon: "ti-brand-github", name: "GitHub profile README",
-        desc: "Create a professional GitHub profile README with stats, skills, and contact. Use GitHub's profile repo (username/username).",
-        resources: [
-          {label:"YT: GitHub Profile README — Akhil Sharma", type:"res-yt", url:"https://www.youtube.com/watch?v=KhGWbt1dAKQ"},
-          {label:"GitHub README generator", type:"res-web", url:"https://rahuldkjain.github.io/gh-profile-readme-generator/"},
-          {label:"GitHub Stats card", type:"res-web", url:"https://github.com/anuraghazra/github-readme-stats"}
-        ]
-      },
-      {
-        time: "10:00 AM", dur: "40 min",
-        icon: "ti-puzzle", name: "Aptitude — Ratio & Proportion basics",
-        desc: "Ratios, proportion, direct/inverse variation, unitary method. 25 Qs from IndiaBix.",
-        resources: [
-          {label:"IndiaBix Ratios", type:"res-web", url:"https://www.indiabix.com/aptitude/ratio-and-proportion/"},
-          {label:"YT: Ratio & Proportion — Padhle", type:"res-yt", url:"https://www.youtube.com/watch?v=lENEh02kJuM"},
-          {label:"PrepInsta Practice", type:"res-web", url:"https://prepinsta.com/aptitude/ratio-and-proportion/"}
-        ]
-      },
-      {
-        time: "10:40 AM", dur: "35 min",
-        icon: "ti-code", name: "LeetCode — 2 Easy problems",
-        desc: "#21 Merge Two Sorted Lists, #26 Remove Duplicates. Focus on linked list / array basics.",
-        resources: [
-          {label:"LeetCode Easy", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
-          {label:"YT: Merge Sorted Lists — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=XIdigk956u0"}
-        ]
-      }
-    ],
-    tip: "GitHub tip: Commit something every day — even just a small README update. Employers literally look at your GitHub activity graph (the green squares)."
-  },
-  {
-    day: 4,
-    title: "Git collaboration + AI Tool #2: Claude Code (CLI)",
-    subtitle: "Forks, open source basics. Run terminal-bound agentic tasks directly from your CLI.",
-    tags: ["tag-gh","tag-ai","tag-lc"],
-    tagLabels: ["GitHub","AI Tools","LeetCode"],
-    slots: [
-      {
-        time: "9:00 AM", dur: "50 min",
-        icon: "ti-brand-github", name: "Forks, issues & open source",
-        desc: "Fork a public repo, make a small change (fix a typo in README), raise a PR. Understand issues and contribution workflow.",
-        resources: [
-          {label:"YT: How to contribute to open source — FreeCodeCamp", type:"res-yt", url:"https://www.youtube.com/watch?v=yzeVMecydCE"},
-          {label:"Guide: First contributions", type:"res-web", url:"https://firstcontributions.github.io/"},
-          {label:"Good First Issues", type:"res-web", url:"https://goodfirstissue.dev/"}
-        ]
-      },
-      {
-        time: "10:00 AM", dur: "50 min",
-        icon: "ti-terminal", name: "AI Tool #2 — Claude Code CLI Environment",
-        desc: "Install Anthropic's official command-line terminal agent loop. Learn to query files, execute programmatic git actions (`claude commit`), run complex testing scripts, and solve broken builds natively within your shell.",
-        resources: [
-          {label:"Docs: Official Claude Code Guide", type:"res-web", url:"https://docs.anthropic.com/en/docs/agents-and-tools/claude-code"},
-          {label:"NPM: @anthropic-ai/claude-code Package", type:"res-web", url:"https://www.npmjs.com/package/@anthropic-ai/claude-code"},
-          {label:"YT: Claude Code Setup & First Run — Continuous Tech", type:"res-yt", url:"https://www.youtube.com/search?q=claude+code+cli+tutorial"},
-          {label:"Anthropic: Agentic CLI Command Reference", type:"res-web", url:"https://docs.anthropic.com/en/docs/agents-and-tools/claude-code#available-commands"}
-        ]
-      },
-      {
-        time: "11:00 AM", dur: "40 min",
-        icon: "ti-puzzle", name: "Aptitude — Simple & Compound Interest",
-        desc: "SI and CI formulas, difference between SI and CI, compound interest variations. 20 Qs each.",
-        resources: [
-          {label:"IndiaBix SI", type:"res-web", url:"https://www.indiabix.com/aptitude/simple-interest/"},
-          {label:"IndiaBix CI", type:"res-web", url:"https://www.indiabix.com/aptitude/compound-interest/"},
-          {label:"YT: SI & CI tricks — Unacademy", type:"res-yt", url:"https://www.youtube.com/watch?v=ABIJ0IWXfrc"}
-        ]
-      },
-      {
-        time: "11:45 AM", dur: "35 min",
-        icon: "ti-code", name: "LeetCode — 2 Easy problems",
-        desc: "#70 Climbing Stairs, #83 Remove Duplicates from Sorted List. Introduces basic dynamic programming thinking.",
-        resources: [
-          {label:"LeetCode Easy", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
-          {label:"YT: Climbing Stairs DP — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=Y0lT9Fck7qI"}
-        ]
-      }
-    ],
-    tip: "Claude Code CLI Tip: Leverage your terminal agent loop to automatically inspect error stacks or logs. You can pipe error states straight into the tool for lightning-fast environment debugging."
-  },
-  {
-    day: 5,
-    title: "Weekly review + Logical Reasoning begins",
-    subtitle: "Consolidate GitHub + AI tools. Start logical reasoning.",
-    tags: ["tag-apt","tag-lc"],
-    tagLabels: ["Aptitude","LeetCode"],
-    slots: [
-      {
-        time: "9:00 AM", dur: "45 min",
-        icon: "ti-refresh", name: "GitHub mini-project",
-        desc: "Create a small public repo: 'placement-prep'. Add a folder structure, README with your 60-day goal, and commit your first aptitude solution file.",
-        resources: [
-          {label:"Markdown guide for README", type:"res-web", url:"https://www.markdownguide.org/basic-syntax/"},
-          {label:"GitHub Student Pack", type:"res-web", url:"https://education.github.com/pack"}
-        ]
-      },
-      {
-        time: "9:50 AM", dur: "50 min",
-        icon: "ti-brain", name: "Logical Reasoning — Number series & coding-decoding",
-        desc: "Number series patterns, letter coding, symbol coding. Solve 20 questions. These appear in every campus placement test.",
-        resources: [
-          {label:"IndiaBix Logical Reasoning", type:"res-web", url:"https://www.indiabix.com/logical-reasoning/"},
-          {label:"YT: Logical Reasoning basics — Padhle", type:"res-yt", url:"https://www.youtube.com/watch?v=1Hy8N2bVQeU"},
-          {label:"PrepInsta Logical", type:"res-web", url:"https://prepinsta.com/logical-reasoning/"}
-        ]
-      },
-      {
-        time: "10:45 AM", dur: "40 min",
-        icon: "ti-puzzle", name: "Aptitude — Time & Work basics",
-        desc: "Work efficiency, combined work, pipes & cisterns formula derivation. 20 Qs practice.",
-        resources: [
-          {label:"IndiaBix Time & Work", type:"res-web", url:"https://www.indiabix.com/aptitude/time-and-work/"},
-          {label:"YT: Time & Work — Padhle", type:"res-yt", url:"https://www.youtube.com/watch?v=6TLLP7HBcEU"},
-          {label:"PrepInsta Practice", type:"res-web", url:"https://prepinsta.com/aptitude/time-and-work/"}
-        ]
-      },
-      {
-        time: "11:30 AM", dur: "35 min",
-        icon: "ti-code", name: "LeetCode — 2 Easy problems",
-        desc: "#104 Max Depth Binary Tree, #121 Best Time to Buy/Sell Stock. Focus on understanding the problem statement clearly.",
-        resources: [
-          {label:"LeetCode Easy", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
-          {label:"YT: Best Time to Buy/Sell — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=1pkOgXD63yU"}
-        ]
-      }
-    ],
-    tip: "Review tip: Look back at Day 1–4. Can you explain the practical layout differences between using Cursor's Composer and running commands inside Claude Code CLI?"
-  },
-  {
-    day: 6,
-    title: "First full mock test day",
-    subtitle: "Simulate a real campus test. Timed aptitude + LeetCode + reflection.",
-    tags: ["tag-apt","tag-lc"],
-    tagLabels: ["Aptitude","LeetCode"],
-    slots: [
-      {
-        time: "9:00 AM", dur: "60 min",
-        icon: "ti-clock", name: "Mock aptitude test — 40 questions, timed",
-        desc: "Take a full 40-question timed test on PrepInsta or IndiaBix covering: percentages, ratio, SI/CI, time & work. Set a 40-minute timer. No help allowed.",
-        resources: [
-          {label:"PrepInsta Mock Test", type:"res-web", url:"https://prepinsta.com/aptitude/"},
-          {label:"IndiaBix Full Test", type:"res-web", url:"https://www.online-test.com/"},
-          {label:"AMCAT Practice", type:"res-web", url:"https://www.myamcat.com/"}
-        ]
-      },
-      {
-        time: "10:05 AM", dur: "30 min",
-        icon: "ti-analyze", name: "Mock test review",
-        desc: "Go through every wrong answer. Find patterns — which topic had most errors? Use your AI tools to check optimization workflows.",
-        resources: [
-          {label:"Claude.ai", type:"res-web", url:"https://claude.ai"},
-          {label:"ChatGPT", type:"res-web", url:"https://chat.openai.com"}
-        ]
-      },
-      {
-        time: "10:40 AM", dur: "50 min",
-        icon: "ti-brain", name: "Logical Reasoning — Puzzles & Seating arrangement",
-        desc: "Linear and circular seating, blood relations, direction sense. These are high-scoring but need calm reading. 20 Qs.",
-        resources: [
-          {label:"IndiaBix Seating", type:"res-web", url:"https://www.indiabix.com/logical-reasoning/seating-arrangement/"},
-          {label:"YT: Seating arrangement tricks — Unacademy", type:"res-yt", url:"https://www.youtube.com/watch?v=BpEfGJn_7WE"},
-          {label:"PrepInsta Puzzles", type:"res-web", url:"https://prepinsta.com/logical-reasoning/"}
-        ]
-      },
-      {
-        time: "11:35 AM", dur: "40 min",
-        icon: "ti-code", name: "LeetCode — 2 Easy problems (timed)",
-        desc: "Try solving each problem in under 15 minutes. #136 Single Number, #141 Linked List Cycle. After, compare your solution with optimal ones.",
-        resources: [
-          {label:"LeetCode Easy", type:"res-lc", url:"https://leetcode.com/problemset/?difficulty=EASY"},
-          {label:"YT: Single Number — NeetCode", type:"res-yt", url:"https://www.youtube.com/watch?v=qMPX1AOa83k"}
-        ]
-      }
-    ],
-    tip: "Mock test mindset: Your score on Day 6 doesn't matter. What matters is finding your weak spots early."
-  }
-];
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+    }
 
-let current = 0;
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+    }
 
-function selectWeek(weekNum) {
-  if(weekNum === 1) {
-    current = 0;
-    renderNav();
-    renderCard();
-  }
-}
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
 
-function renderNav() {
-  const nav = document.getElementById('dayNav');
-  nav.innerHTML = days.map((d,i) =>
-    `<button class="day-btn${i===current?' active':''}" onclick="switchDay(${i})">Day ${d.day}</button>`
-  ).join('');
-}
+    .stat-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
 
-function renderCard() {
-  const d = days[current];
-  const card = document.getElementById('dayCard');
-  let slotsHTML = d.slots.map(s => `
-    <div class="slot">
-      <div class="slot-time">
-        <p class="time">${s.time}</p>
-        <p class="dur">${s.dur}</p>
+    .progress-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 24px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+    }
+
+    .progress-header strong { color: var(--green); }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--surface2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+      border-radius: 99px;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .week-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .week-btn {
+      font-family: inherit;
+      font-size: 0.85rem;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    .week-btn:hover:not(:disabled) {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .week-btn.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .week-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .day-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .day-tab {
+      font-family: inherit;
+      font-size: 0.8rem;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .day-tab:hover {
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    .day-tab.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(108, 158, 255, 0.35);
+    }
+
+    .day-tab.done::after {
+      content: "✓";
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      font-size: 0.55rem;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .day-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .day-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .day-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .day-subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-weight: 600;
+    }
+
+    .tag-gh { background: var(--purple-dim); color: var(--purple); }
+    .tag-ai { background: var(--orange-dim); color: var(--orange); }
+    .tag-lc { background: var(--green-dim); color: var(--green); }
+    .tag-apt { background: var(--accent-dim); color: var(--accent); }
+
+    .checklist-box {
+      margin: 0;
+      padding: 16px 20px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .checklist-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--green);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checklist-title span {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .checklist {
+      list-style: none;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 12px;
+      margin-bottom: 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+      user-select: none;
+    }
+
+    .check-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .check-item.checked {
+      opacity: 0.75;
+    }
+
+    .check-item.checked .check-text {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border: 2px solid var(--border);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      margin-top: 1px;
+    }
+
+    .check-item.checked .check-box {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .check-item.checked .check-box::after {
+      content: "✓";
+      color: #0f1117;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .check-text {
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .slot {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .slot:last-child { border-bottom: none; }
+
+    @media (max-width: 560px) {
+      .slot { grid-template-columns: 1fr; }
+      .slot-time { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+
+    .slot-time {
+      padding: 14px 16px;
+      background: rgba(0, 0, 0, 0.2);
+      border-right: 1px solid var(--border);
+    }
+
+    .slot-time .time {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .slot-time .dur {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .slot-content { padding: 14px 18px; }
+
+    .slot-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .slot-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+
+    .res-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .res-link {
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: 99px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+
+    .res-link:hover {
+      transform: translateY(-1px);
+      opacity: 0.9;
+    }
+
+    .res-yt { background: #3d1f1f; color: #f8a0a0; }
+    .res-pdf { background: #3d3018; color: #f5c878; }
+    .res-web { background: #1a2d4a; color: #8ec5ff; }
+    .res-lc { background: #1a3320; color: #7ee8a8; }
+
+    .tip-box {
+      margin: 0;
+      padding: 14px 20px;
+      background: rgba(108, 158, 255, 0.06);
+      border-top: 1px solid var(--border);
+    }
+
+    .tip-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .tip-text {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 0.82rem;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-primary {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .load-error {
+      display: none;
+      margin: 16px 0;
+      padding: 14px 16px;
+      background: #3d1f1f;
+      border: 1px solid #a04040;
+      border-radius: var(--radius);
+      color: #f8a0a0;
+      font-size: 0.88rem;
+    }
+
+    .load-error.visible { display: block; }
+  </style>
+</head>
+<body>
+  <div id="loadError" class="load-error" role="alert"></div>
+  <div class="app">
+    <header>
+      <h1>Placement Prep 2026</h1>
+      <p>60-day summer kickstart — GitHub, AI tools, LeetCode &amp; aptitude. Check off tasks as you complete each day.</p>
+    </header>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Duration</div>
+        <div class="stat-value">60 days</div>
       </div>
-      <div class="slot-content">
-        <div class="slot-label">
-          <i class="ti ${s.icon} slot-icon" aria-hidden="true"></i>
-          <span class="slot-name">${s.name}</span>
-        </div>
-        <p class="slot-desc">${s.desc}</p>
-        <div class="res-row">
-          ${s.resources.map(r => `<a href="${r.url}" class="res-link ${r.type}" target="_blank">${r.label}</a>`).join('')}
-        </div>
+      <div class="stat">
+        <div class="stat-label">Daily study</div>
+        <div class="stat-value">3.5 hrs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">LeetCode target</div>
+        <div class="stat-value">120 Qs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Aptitude Qs</div>
+        <div class="stat-value">~1800</div>
       </div>
     </div>
-  `).join('');
 
-  card.innerHTML = `
-    <div class="day-header">
-      <p class="day-title">Day ${d.day} — ${d.title}</p>
-      <p class="day-subtitle">${d.subtitle}</p>
-      <div class="tag-row" style="margin-top:7px">
-        ${d.tags.map((t,i) => `<span class="tag ${t}">${d.tagLabels[i]}</span>`).join('')}
+    <div class="progress-wrap">
+      <div class="progress-header">
+        <span>Overall progress (Week 1)</span>
+        <strong id="progressPct">0%</strong>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
       </div>
     </div>
-    <div class="day-body">${slotsHTML}</div>
-    <div class="tip-box">
-      <p class="tip-label"><i class="ti ti-bulb" aria-hidden="true" style="margin-right:3px;font-size:12px"></i> Advisor's Tip</p>
-      <p class="tip-text">${d.tip}</p>
+
+    <div class="section-label">Select week</div>
+    <div class="week-nav">
+      <button class="week-btn active" id="week1Btn" type="button">Week 1 — Days 1–6</button>
+      <button class="week-btn" type="button" disabled title="Coming soon">Week 2</button>
     </div>
-  `;
-}
 
-function switchDay(i) {
-  current = i;
-  renderNav();
-  renderCard();
-}
+    <div class="section-label">Select day</div>
+    <div class="day-tabs" id="dayTabs" role="tablist"></div>
 
-// Initial Run
-renderNav();
-renderCard();
-</script>
+    <div id="dayPanels"></div>
+
+    <div class="actions">
+      <button class="btn" type="button" id="resetDayBtn">Reset current day</button>
+      <button class="btn btn-primary" type="button" id="resetAllBtn">Reset all progress</button>
+    </div>
+
+    <footer>
+      Commit daily to
+      <a href="https://github.com/tapasbadal/Placement-Preparation-Plan-Summer-" target="_blank" rel="noopener">Placement-Prep-2026</a>
+    </footer>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "placement-prep-checklist-v1";
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function showLoadError(msg) {
+      const el = document.getElementById("loadError");
+      if (el) {
+        el.textContent = msg;
+        el.classList.add("visible");
+      }
+    }
+
+    const days = [
+      {
+        day: 1,
+        title: "Git & GitHub — absolute basics",
+        subtitle: "What is version control? Setting up GitHub account and first repo.",
+        tags: ["tag-gh"],
+        tagLabels: ["GitHub"],
+        checklist: [
+          "Git client correctly configured locally via terminal with user name and email credentials.",
+          "Public GitHub repository titled Placement-Prep-2026 instantiated.",
+          "Green submission checkmarks obtained on LeetCode for problems 1929 and 2413.",
+          "Minimum 15 quantitative aptitude practice questions solved on IndiaBIX."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "60 min",
+            name: "GitHub setup & concepts",
+            desc: "Watch intro video. Create GitHub account. Understand: repo, commit, push, pull. Install Git on your laptop.",
+            resources: [
+              { label: "YT: Git & GitHub in 1hr — Apna College", type: "res-yt", url: "https://www.youtube.com/watch?v=Ez8F0nW6S-w" },
+              { label: "YT: GitHub for beginners — FreeCodeCamp", type: "res-yt", url: "https://www.youtube.com/watch?v=RGOj5yH7evk" },
+              { label: "Docs: GitHub Quickstart", type: "res-web", url: "https://docs.github.com/en/get-started/quickstart" }
+            ]
+          },
+          {
+            time: "10:15 AM", dur: "45 min",
+            name: "Aptitude — Percentages basics",
+            desc: "Concept: percentage formulas, percentage increase/decrease, back-calculation. Solve 25 questions.",
+            resources: [
+              { label: "IndiaBix Percentages", type: "res-web", url: "https://www.indiabix.com/aptitude/percentage/" },
+              { label: "YT: Percentages shortcuts — Padhle", type: "res-yt", url: "https://www.youtube.com/watch?v=CJcOz40-qlE" },
+              { label: "PrepInsta Practice", type: "res-web", url: "https://prepinsta.com/aptitude/percentage/" }
+            ]
+          },
+          {
+            time: "11:15 AM", dur: "40 min",
+            name: "LeetCode — 2 Easy problems",
+            desc: "Problems: #1929 Concatenation of Array, #2413 Smallest Even Multiple. Read carefully, attempt, then study solution.",
+            resources: [
+              { label: "LeetCode #1929", type: "res-lc", url: "https://leetcode.com/problems/concatenation-of-array/" },
+              { label: "LeetCode #2413", type: "res-lc", url: "https://leetcode.com/problems/smallest-even-multiple/" },
+              { label: "LeetCode Easy list", type: "res-lc", url: "https://leetcode.com/problemset/?difficulty=EASY" }
+            ]
+          }
+        ],
+        tip: "Day 1 tip: Don't rush the GitHub setup. A clean first repo with a proper README is more valuable than speed."
+      },
+      {
+        day: 2,
+        title: "Git workflow + AI Tool #1: Cursor IDE",
+        subtitle: "Learn branching, commit messages. Explore advanced multi-file AI editing and Vibe Coding.",
+        tags: ["tag-gh", "tag-ai"],
+        tagLabels: ["GitHub", "AI Tools"],
+        checklist: [
+          "Created a branch, made commits, and raised your first pull request on GitHub.",
+          "Cursor IDE installed; tested Ctrl+K (inline edit), Ctrl+L (chat), and Ctrl+I (Composer).",
+          "Minimum 25 percentage aptitude questions solved on IndiaBIX.",
+          "Green submission checkmarks on LeetCode for problems #13 (Roman to Integer) and #20 (Valid Parentheses)."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "50 min",
+            name: "Git branching & commit messages",
+            desc: "Learn: git branch, git checkout, git merge, pull requests. Create a branch in your repo and raise your first PR.",
+            resources: [
+              { label: "YT: Git Branching — Traversy Media", type: "res-yt", url: "https://www.youtube.com/watch?v=QV0kVNvkMxc" },
+              { label: "Interactive: Learn Git Branching", type: "res-web", url: "https://learngitbranching.js.org/" },
+              { label: "PDF: Git Cheat Sheet — GitHub", type: "res-pdf", url: "https://education.github.com/git-cheat-sheet-education.pdf" }
+            ]
+          },
+          {
+            time: "10:00 AM", dur: "50 min",
+            name: "AI Tool #1 — Cursor IDE, Composer & Agent",
+            desc: "Download and set up Cursor. Master Ctrl+K, Ctrl+L, and Ctrl+I for multi-file edits via natural language.",
+            resources: [
+              { label: "Docs: Cursor Official Guide", type: "res-web", url: "https://docs.cursor.com/" },
+              { label: "YT: Master Cursor 2.0", type: "res-yt", url: "https://www.youtube.com/watch?v=-PcOTX15geI" },
+              { label: "Forum: Cursor Best Practices", type: "res-web", url: "https://forum.cursor.com/" }
+            ]
+          },
+          {
+            time: "11:00 AM", dur: "40 min",
+            name: "Aptitude — Percentages advanced",
+            desc: "Mixed percentage problems: successive % change, profit-loss link. Solve 25 Qs.",
+            resources: [
+              { label: "IndiaBix Practice", type: "res-web", url: "https://www.indiabix.com/aptitude/percentage/" }
+            ]
+          },
+          {
+            time: "11:45 AM", dur: "35 min",
+            name: "LeetCode — 2 Easy problems",
+            desc: "#13 Roman to Integer, #20 Valid Parentheses. Focus on string/array manipulation patterns.",
+            resources: [
+              { label: "LeetCode #13", type: "res-lc", url: "https://leetcode.com/problems/roman-to-integer/" },
+              { label: "LeetCode #20", type: "res-lc", url: "https://leetcode.com/problems/valid-parentheses/" }
+            ]
+          }
+        ],
+        tip: "Cursor Tip: Use Composer (Ctrl+I) for boilerplate. Scope context with @Files or @Folders."
+      },
+      {
+        day: 3,
+        title: "GitHub profile + Profile Redesign",
+        subtitle: "Build your GitHub profile README. Refine markdown styles.",
+        tags: ["tag-gh"],
+        tagLabels: ["GitHub"],
+        checklist: [
+          "GitHub profile README repo created (username/username) with stats and skills section.",
+          "Minimum 25 ratio & proportion questions solved on IndiaBIX.",
+          "Green submission checkmarks on LeetCode for #21 (Merge Two Sorted Lists) and #26 (Remove Duplicates).",
+          "Today's work committed and pushed to Placement-Prep-2026."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "55 min",
+            name: "GitHub profile README",
+            desc: "Create a professional GitHub profile README with stats, skills, and contact.",
+            resources: [
+              { label: "YT: GitHub Profile README", type: "res-yt", url: "https://www.youtube.com/watch?v=KhGWbt1dAKQ" },
+              { label: "README generator", type: "res-web", url: "https://rahuldkjain.github.io/gh-profile-readme-generator/" },
+              { label: "GitHub Stats card", type: "res-web", url: "https://github.com/anuraghazra/github-readme-stats" }
+            ]
+          },
+          {
+            time: "10:00 AM", dur: "40 min",
+            name: "Aptitude — Ratio & Proportion basics",
+            desc: "Ratios, proportion, direct/inverse variation. 25 Qs from IndiaBix.",
+            resources: [
+              { label: "IndiaBix Ratios", type: "res-web", url: "https://www.indiabix.com/aptitude/ratio-and-proportion/" }
+            ]
+          },
+          {
+            time: "10:40 AM", dur: "35 min",
+            name: "LeetCode — 2 Easy problems",
+            desc: "#21 Merge Two Sorted Lists, #26 Remove Duplicates.",
+            resources: [
+              { label: "LeetCode #21", type: "res-lc", url: "https://leetcode.com/problems/merge-two-sorted-lists/" },
+              { label: "LeetCode #26", type: "res-lc", url: "https://leetcode.com/problems/remove-duplicates-from-sorted-array/" }
+            ]
+          }
+        ],
+        tip: "Commit something every day — employers look at your GitHub activity graph."
+      },
+      {
+        day: 4,
+        title: "Git collaboration + AI Tool #2: Claude Code (CLI)",
+        subtitle: "Forks, open source basics. Run terminal-bound agentic tasks from your CLI.",
+        tags: ["tag-gh", "tag-ai", "tag-lc"],
+        tagLabels: ["GitHub", "AI Tools", "LeetCode"],
+        checklist: [
+          "Forked a public repo, made a small change, and raised a pull request.",
+          "Claude Code CLI installed and ran at least one file-query or git-related command.",
+          "Minimum 20 simple-interest and 20 compound-interest questions solved on IndiaBIX.",
+          "Green submission checkmarks on LeetCode for #70 (Climbing Stairs) and #83 (Remove Duplicates from Sorted List)."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "50 min",
+            name: "Forks, issues & open source",
+            desc: "Fork a public repo, make a small change, raise a PR. Understand issues and contribution workflow.",
+            resources: [
+              { label: "First contributions guide", type: "res-web", url: "https://firstcontributions.github.io/" },
+              { label: "Good First Issues", type: "res-web", url: "https://goodfirstissue.dev/" }
+            ]
+          },
+          {
+            time: "10:00 AM", dur: "50 min",
+            name: "AI Tool #2 — Claude Code CLI",
+            desc: "Install Anthropic's CLI agent. Query files, run git actions, and debug builds in your shell.",
+            resources: [
+              { label: "Docs: Claude Code Guide", type: "res-web", url: "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code" }
+            ]
+          },
+          {
+            time: "11:00 AM", dur: "40 min",
+            name: "Aptitude — Simple & Compound Interest",
+            desc: "SI and CI formulas, difference between SI and CI. 20 Qs each.",
+            resources: [
+              { label: "IndiaBix SI", type: "res-web", url: "https://www.indiabix.com/aptitude/simple-interest/" },
+              { label: "IndiaBix CI", type: "res-web", url: "https://www.indiabix.com/aptitude/compound-interest/" }
+            ]
+          },
+          {
+            time: "11:45 AM", dur: "35 min",
+            name: "LeetCode — 2 Easy problems",
+            desc: "#70 Climbing Stairs, #83 Remove Duplicates from Sorted List.",
+            resources: [
+              { label: "LeetCode #70", type: "res-lc", url: "https://leetcode.com/problems/climbing-stairs/" },
+              { label: "LeetCode #83", type: "res-lc", url: "https://leetcode.com/problems/remove-duplicates-from-sorted-list/" }
+            ]
+          }
+        ],
+        tip: "Pipe error logs into your CLI agent for faster debugging."
+      },
+      {
+        day: 5,
+        title: "Weekly review + Logical Reasoning begins",
+        subtitle: "Consolidate GitHub + AI tools. Start logical reasoning.",
+        tags: ["tag-apt", "tag-lc"],
+        tagLabels: ["Aptitude", "LeetCode"],
+        checklist: [
+          "Public repo 'placement-prep' created with folder structure, README, and first aptitude solution file.",
+          "Minimum 20 logical-reasoning questions (number series & coding-decoding) solved on IndiaBIX.",
+          "Minimum 20 time-and-work aptitude questions solved on IndiaBIX.",
+          "Green submission checkmarks on LeetCode for #104 (Max Depth Binary Tree) and #121 (Best Time to Buy/Sell Stock)."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "45 min",
+            name: "GitHub mini-project",
+            desc: "Create 'placement-prep' repo with README and folder structure.",
+            resources: [
+              { label: "Markdown guide", type: "res-web", url: "https://www.markdownguide.org/basic-syntax/" },
+              { label: "GitHub Student Pack", type: "res-web", url: "https://education.github.com/pack" }
+            ]
+          },
+          {
+            time: "9:50 AM", dur: "50 min",
+            name: "Logical Reasoning — Number series & coding-decoding",
+            desc: "Number series, letter coding, symbol coding. Solve 20 questions.",
+            resources: [
+              { label: "IndiaBix Logical", type: "res-web", url: "https://www.indiabix.com/logical-reasoning/" }
+            ]
+          },
+          {
+            time: "10:45 AM", dur: "40 min",
+            name: "Aptitude — Time & Work basics",
+            desc: "Work efficiency, combined work, pipes & cisterns. 20 Qs.",
+            resources: [
+              { label: "IndiaBix Time & Work", type: "res-web", url: "https://www.indiabix.com/aptitude/time-and-work/" }
+            ]
+          },
+          {
+            time: "11:30 AM", dur: "35 min",
+            name: "LeetCode — 2 Easy problems",
+            desc: "#104 Max Depth Binary Tree, #121 Best Time to Buy/Sell Stock.",
+            resources: [
+              { label: "LeetCode #104", type: "res-lc", url: "https://leetcode.com/problems/maximum-depth-of-binary-tree/" },
+              { label: "LeetCode #121", type: "res-lc", url: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" }
+            ]
+          }
+        ],
+        tip: "Review Days 1–4: explain the difference between Cursor Composer and Claude Code CLI."
+      },
+      {
+        day: 6,
+        title: "First full mock test day",
+        subtitle: "Simulate a real campus test. Timed aptitude + LeetCode + reflection.",
+        tags: ["tag-apt", "tag-lc"],
+        tagLabels: ["Aptitude", "LeetCode"],
+        checklist: [
+          "Completed a 40-question timed aptitude mock (percentages, ratio, SI/CI, time & work) in under 40 minutes.",
+          "Reviewed every wrong answer and noted weak topics.",
+          "Minimum 20 logical-reasoning questions (seating & puzzles) solved on IndiaBIX.",
+          "Green submission checkmarks on LeetCode for #136 (Single Number) and #141 (Linked List Cycle), each under 15 minutes."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "60 min",
+            name: "Mock aptitude test — 40 questions, timed",
+            desc: "Full timed test on PrepInsta or IndiaBix. No help allowed.",
+            resources: [
+              { label: "PrepInsta Mock", type: "res-web", url: "https://prepinsta.com/aptitude/" },
+              { label: "IndiaBix Tests", type: "res-web", url: "https://www.indiabix.com/online-test/" }
+            ]
+          },
+          {
+            time: "10:05 AM", dur: "30 min",
+            name: "Mock test review",
+            desc: "Review wrong answers. Find patterns in weak topics.",
+            resources: [
+              { label: "Claude.ai", type: "res-web", url: "https://claude.ai" }
+            ]
+          },
+          {
+            time: "10:40 AM", dur: "50 min",
+            name: "Logical Reasoning — Puzzles & Seating",
+            desc: "Linear/circular seating, blood relations, direction sense. 20 Qs.",
+            resources: [
+              { label: "IndiaBix Seating", type: "res-web", url: "https://www.indiabix.com/logical-reasoning/seating-arrangement/" }
+            ]
+          },
+          {
+            time: "11:35 AM", dur: "40 min",
+            name: "LeetCode — 2 Easy problems (timed)",
+            desc: "#136 Single Number, #141 Linked List Cycle — under 15 min each.",
+            resources: [
+              { label: "LeetCode #136", type: "res-lc", url: "https://leetcode.com/problems/single-number/" },
+              { label: "LeetCode #141", type: "res-lc", url: "https://leetcode.com/problems/linked-list-cycle/" }
+            ]
+          }
+        ],
+        tip: "Your Day 6 score doesn't matter — finding weak spots early does."
+      }
+    ];
+
+    let currentDay = 0;
+    let checked = {};
+
+    function emptyProgress() {
+      const init = {};
+      days.forEach((d) => {
+        init[d.day] = d.checklist.map(() => false);
+      });
+      return init;
+    }
+
+    function normalizeProgress(parsed) {
+      const init = emptyProgress();
+      if (!parsed || typeof parsed !== "object") return init;
+      days.forEach((d) => {
+        const stored = parsed[d.day] ?? parsed[String(d.day)];
+        if (Array.isArray(stored) && stored.length === d.checklist.length) {
+          init[d.day] = stored.map(Boolean);
+        }
+      });
+      return init;
+    }
+
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) return normalizeProgress(JSON.parse(raw));
+      } catch (_) {}
+      return emptyProgress();
+    }
+
+    function saveProgress() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+      } catch (_) {
+        /* file:// or private mode — page still works, progress not saved */
+      }
+    }
+
+    function isDayComplete(dayNum) {
+      const items = checked[dayNum];
+      return items && items.length > 0 && items.every(Boolean);
+    }
+
+    function getOverallProgress() {
+      let done = 0;
+      let total = 0;
+      days.forEach((d) => {
+        total += d.checklist.length;
+        done += (checked[d.day] || []).filter(Boolean).length;
+      });
+      return total ? Math.round((done / total) * 100) : 0;
+    }
+
+    function updateProgressUI() {
+      const pct = getOverallProgress();
+      document.getElementById("progressPct").textContent = pct + "%";
+      document.getElementById("progressFill").style.width = pct + "%";
+    }
+
+    function renderTabs() {
+      const tabs = document.getElementById("dayTabs");
+      tabs.innerHTML = days
+        .map(
+          (d, i) =>
+            `<button class="day-tab${i === currentDay ? " active" : ""}${isDayComplete(d.day) ? " done" : ""}" 
+              role="tab" aria-selected="${i === currentDay}" data-day="${i}" type="button">Day ${d.day}</button>`
+        )
+        .join("");
+
+      tabs.querySelectorAll(".day-tab").forEach((btn) => {
+        btn.addEventListener("click", () => switchDay(Number(btn.dataset.day)));
+      });
+    }
+
+    function renderChecklist(dayNum, checklist) {
+      const states = Array.isArray(checked[dayNum]) ? checked[dayNum] : checklist.map(() => false);
+      const doneCount = states.filter(Boolean).length;
+      return `
+        <div class="checklist-box">
+          <div class="checklist-title">
+            Day ${dayNum} Completion Checklist
+            <span>${doneCount}/${checklist.length}</span>
+          </div>
+          <ul class="checklist">
+            ${checklist
+              .map(
+                (text, i) => `
+              <li class="check-item${states[i] ? " checked" : ""}" data-day="${dayNum}" data-idx="${i}" role="checkbox" aria-checked="${states[i]}">
+                <div class="check-box"></div>
+                <span class="check-text">${escapeHtml(text)}</span>
+              </li>`
+              )
+              .join("")}
+          </ul>
+        </div>`;
+    }
+
+    function renderSlots(slots) {
+      return slots
+        .map(
+          (s) => `
+        <div class="slot">
+          <div class="slot-time">
+            <div class="time">${escapeHtml(s.time)}</div>
+            <div class="dur">${escapeHtml(s.dur)}</div>
+          </div>
+          <div class="slot-content">
+            <div class="slot-name">${escapeHtml(s.name)}</div>
+            <p class="slot-desc">${escapeHtml(s.desc)}</p>
+            <div class="res-row">
+              ${s.resources.map((r) => `<a href="${escapeHtml(r.url)}" class="res-link ${escapeHtml(r.type)}" target="_blank" rel="noopener">${escapeHtml(r.label)}</a>`).join("")}
+            </div>
+          </div>
+        </div>`
+        )
+        .join("");
+    }
+
+    function renderPanels() {
+      const container = document.getElementById("dayPanels");
+      container.innerHTML = days
+        .map(
+          (d, i) => `
+        <div class="panel${i === currentDay ? " active" : ""}" id="panel-${d.day}" role="tabpanel">
+          <div class="day-card">
+            <div class="day-header">
+              <h2 class="day-title">Day ${d.day} &mdash; ${escapeHtml(d.title)}</h2>
+              <p class="day-subtitle">${escapeHtml(d.subtitle)}</p>
+              <div class="tag-row">
+                ${d.tags.map((t, j) => `<span class="tag ${escapeHtml(t)}">${escapeHtml(d.tagLabels[j])}</span>`).join("")}
+              </div>
+            </div>
+            ${renderChecklist(d.day, d.checklist)}
+            <div class="day-body">${renderSlots(d.slots)}</div>
+            <div class="tip-box">
+              <div class="tip-label">Advisor&apos;s Tip</div>
+              <p class="tip-text">${escapeHtml(d.tip)}</p>
+            </div>
+          </div>
+        </div>`
+        )
+        .join("");
+
+      container.querySelectorAll(".check-item").forEach((item) => {
+        item.addEventListener("click", () => toggleCheck(item));
+      });
+    }
+
+    function toggleCheck(item) {
+      const dayNum = Number(item.dataset.day);
+      const idx = Number(item.dataset.idx);
+      if (!checked[dayNum]) checked[dayNum] = days.find((d) => d.day === dayNum).checklist.map(() => false);
+      checked[dayNum][idx] = !checked[dayNum][idx];
+      saveProgress();
+      item.classList.toggle("checked", checked[dayNum][idx]);
+      item.setAttribute("aria-checked", checked[dayNum][idx]);
+      updateProgressUI();
+      renderTabs();
+      const title = document.querySelector(`#panel-${dayNum} .checklist-title span`);
+      if (title) {
+        const done = checked[dayNum].filter(Boolean).length;
+        title.textContent = `${done}/${checked[dayNum].length}`;
+      }
+    }
+
+    function switchDay(index) {
+      currentDay = index;
+      document.querySelectorAll(".panel").forEach((p, i) => p.classList.toggle("active", i === index));
+      renderTabs();
+    }
+
+    document.getElementById("resetDayBtn").addEventListener("click", () => {
+      const d = days[currentDay];
+      if (confirm(`Reset all checklist items for Day ${d.day}?`)) {
+        checked[d.day] = d.checklist.map(() => false);
+        saveProgress();
+        renderPanels();
+        renderTabs();
+        updateProgressUI();
+        switchDay(currentDay);
+      }
+    });
+
+    document.getElementById("resetAllBtn").addEventListener("click", () => {
+      if (confirm("Reset progress for all days? This cannot be undone.")) {
+        days.forEach((d) => {
+          checked[d.day] = d.checklist.map(() => false);
+        });
+        saveProgress();
+        renderPanels();
+        renderTabs();
+        updateProgressUI();
+        switchDay(currentDay);
+      }
+    });
+
+    function initApp() {
+      checked = loadProgress();
+      renderTabs();
+      renderPanels();
+      updateProgressUI();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        try { initApp(); } catch (err) {
+          showLoadError("Page failed to load: " + err.message + ". Try clearing site data for this file or open in Chrome/Edge.");
+          console.error(err);
+        }
+      });
+    } else {
+      try { initApp(); } catch (err) {
+        showLoadError("Page failed to load: " + err.message);
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>
