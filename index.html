@@ -516,6 +516,130 @@
     }
 
     .load-error.visible { display: block; }
+
+    .submission-box {
+      margin: 0;
+      padding: 18px 20px;
+      background: var(--surface2);
+      border-top: 1px solid var(--border);
+    }
+
+    .submission-box h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--green);
+    }
+
+    .submission-box .sub-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.55;
+    }
+
+    .submission-requirements {
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+
+    .submission-requirements ul {
+      margin: 8px 0 0 18px;
+    }
+
+    .submission-requirements li { margin-bottom: 4px; }
+
+    .form-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .form-grid label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-grid input,
+    .form-grid select {
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.88rem;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .form-grid input:focus,
+    .form-grid select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-dim);
+    }
+
+    .form-grid input.invalid { border-color: #a04040; }
+
+    .form-hint {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .form-success {
+      display: none;
+      padding: 14px 16px;
+      background: var(--green-dim);
+      border: 1px solid rgba(61, 214, 140, 0.35);
+      border-radius: 8px;
+      color: var(--green);
+      font-size: 0.85rem;
+      margin-top: 12px;
+    }
+
+    .form-success.visible { display: block; }
+
+    .form-error {
+      font-size: 0.8rem;
+      color: #f8a0a0;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .form-error.visible { display: block; }
+
+    .google-form-embed {
+      width: 100%;
+      min-height: 520px;
+      border: none;
+      border-radius: 8px;
+      background: var(--bg);
+    }
+
+    .instructor-note {
+      font-size: 0.75rem;
+      color: var(--orange);
+      background: var(--orange-dim);
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
   </style>
 </head>
 <body>
@@ -584,6 +708,13 @@
 
   <script>
     const STORAGE_KEY = "placement-prep-checklist-v1";
+
+    /* Instructor: set your email to receive Day 6 submissions (FormSubmit — free).
+       Or paste a Google Form embed URL to use Google Forms instead. */
+    const INSTRUCTOR_CONFIG = {
+      submissionEmail: "tapas.badal@bennett.edu.in",
+      googleFormEmbedUrl: ""
+    };
 
     function escapeHtml(str) {
       return String(str)
@@ -847,53 +978,38 @@
       },
       {
         day: 6,
-        title: "First full mock test day",
-        subtitle: "Simulate a real campus test. Timed aptitude + LeetCode + reflection.",
-        tags: ["tag-apt", "tag-lc"],
-        tagLabels: ["Aptitude", "LeetCode"],
+        title: "Week 1 assignment — LeetCode video submission",
+        subtitle: "At-home assignment (no campus mock test). Record yourself solving any LeetCode problem you completed this week and submit your YouTube link below.",
+        tags: ["tag-lc"],
+        tagLabels: ["LeetCode Assignment"],
+        hasSubmissionForm: true,
         checklist: [
-          "Completed a 40-question timed aptitude mock (percentages, ratio, SI/CI, time & work) in under 40 minutes.",
-          "Reviewed every wrong answer and noted weak topics.",
-          "Minimum 20 logical-reasoning questions (seating & puzzles) solved on IndiaBIX.",
-          "Green submission checkmarks on LeetCode for #136 (Single Number) and #141 (Linked List Cycle), each under 15 minutes."
+          "Selected one LeetCode problem you got a green checkmark on during Days 1–5 this week.",
+          "Recorded a 5–15 minute video: read the problem, explain approach, code walkthrough, and time/space complexity.",
+          "Uploaded the video to YouTube (Public or Unlisted — not Private).",
+          "Submitted the YouTube link using the submission form on this page."
         ],
         slots: [
           {
-            time: "9:00 AM", dur: "60 min",
-            name: "Mock aptitude test — 40 questions, timed",
-            desc: "Full timed test on PrepInsta or IndiaBix. No help allowed.",
+            time: "Required", dur: "Assignment",
+            name: "Record and upload your LeetCode solution video",
+            desc: "Pick any one problem you solved green on LeetCode during Week 1 (Days 1–5). Record your screen + voice (or camera) while you explain and code the solution. Upload to your YouTube channel.",
             resources: [
-              { label: "PrepInsta Mock", type: "res-web", url: "https://prepinsta.com/aptitude/" },
-              { label: "IndiaBix Tests", type: "res-web", url: "https://www.indiabix.com/online-test/" }
+              { label: "YT: How to upload", type: "res-yt", url: "https://www.youtube.com/watch?v=Vq0Ehqd5Y1E" },
+              { label: "OBS Studio (free recorder)", type: "res-web", url: "https://obsproject.com/" },
+              { label: "LeetCode Submissions", type: "res-lc", url: "https://leetcode.com/submissions/" }
             ]
           },
           {
-            time: "10:05 AM", dur: "30 min",
-            name: "Mock test review",
-            desc: "Review wrong answers. Find patterns in weak topics.",
+            time: "Optional", dur: "45 min",
+            name: "Light revision at home",
+            desc: "Review aptitude topics from this week (percentages, ratio, SI/CI) — 15 questions on IndiaBIX. No timed mock required.",
             resources: [
-              { label: "Claude.ai", type: "res-web", url: "https://claude.ai" }
-            ]
-          },
-          {
-            time: "10:40 AM", dur: "50 min",
-            name: "Logical Reasoning — Puzzles & Seating",
-            desc: "Linear/circular seating, blood relations, direction sense. 20 Qs.",
-            resources: [
-              { label: "IndiaBix Seating", type: "res-web", url: "https://www.indiabix.com/logical-reasoning/seating-arrangement/" }
-            ]
-          },
-          {
-            time: "11:35 AM", dur: "40 min",
-            name: "LeetCode — 2 Easy problems (timed)",
-            desc: "#136 Single Number, #141 Linked List Cycle — under 15 min each.",
-            resources: [
-              { label: "LeetCode #136", type: "res-lc", url: "https://leetcode.com/problems/single-number/" },
-              { label: "LeetCode #141", type: "res-lc", url: "https://leetcode.com/problems/linked-list-cycle/" }
+              { label: "IndiaBix Aptitude", type: "res-web", url: "https://www.indiabix.com/aptitude/" }
             ]
           }
         ],
-        tip: "Your Day 6 score doesn't matter — finding weak spots early does."
+        tip: "Treat the video like teaching a junior: speak clearly, show your thought process, and mention one mistake you almost made. Unlisted YouTube links are fine if you do not want the video public."
       }
     ];
 
@@ -995,6 +1111,163 @@
         </div>`;
     }
 
+    function isValidYouTubeUrl(url) {
+      try {
+        const u = new URL(url.trim());
+        const host = u.hostname.replace(/^www\./, "");
+        if (host === "youtu.be") return u.pathname.length > 1;
+        if (host === "youtube.com" || host === "m.youtube.com") {
+          return u.pathname.includes("/watch") || u.pathname.includes("/shorts/") || u.searchParams.has("v");
+        }
+        return false;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function renderSubmissionForm() {
+      const useGoogle = INSTRUCTOR_CONFIG.googleFormEmbedUrl && INSTRUCTOR_CONFIG.googleFormEmbedUrl.trim().length > 10;
+      const emailSet = INSTRUCTOR_CONFIG.submissionEmail && INSTRUCTOR_CONFIG.submissionEmail.includes("@");
+
+      if (useGoogle) {
+        return `
+          <div class="submission-box" id="submissionBox">
+            <h3>Submit your YouTube video link</h3>
+            <p class="sub-desc">Use the form below to submit your Week 1 LeetCode video assignment.</p>
+            <iframe class="google-form-embed" src="${escapeHtml(INSTRUCTOR_CONFIG.googleFormEmbedUrl.trim())}" title="Day 6 submission form">Loading form…</iframe>
+          </div>`;
+      }
+
+      const instructorWarning = emailSet
+        ? ""
+        : `<p class="instructor-note">Instructor: set <code>submissionEmail</code> in index.html so students can submit.</p>`;
+
+      return `
+        <div class="submission-box" id="submissionBox">
+          <h3>Submit your YouTube video link</h3>
+          <p class="sub-desc">Complete the assignment above, then fill this form. One submission per student for Week 1.</p>
+          ${instructorWarning}
+          <div class="submission-requirements">
+            <strong>Video must include:</strong>
+            <ul>
+              <li>LeetCode problem number &amp; title (from this week)</li>
+              <li>Your approach before coding</li>
+              <li>Code walkthrough (screen share is fine)</li>
+              <li>Time and space complexity at the end</li>
+              <li>YouTube link must be <strong>Public</strong> or <strong>Unlisted</strong></li>
+            </ul>
+          </div>
+          <form id="day6SubmissionForm" class="form-grid" novalidate>
+            <div>
+              <label for="studentName">Full name</label>
+              <input type="text" id="studentName" name="name" required autocomplete="name" placeholder="e.g. Rahul Sharma" />
+            </div>
+            <div>
+              <label for="studentRoll">Roll number / Student ID</label>
+              <input type="text" id="studentRoll" name="roll_number" required placeholder="e.g. B23CS045" />
+            </div>
+            <div>
+              <label for="studentEmail">College email</label>
+              <input type="email" id="studentEmail" name="email" required autocomplete="email" placeholder="name@bennett.edu.in" />
+            </div>
+            <div>
+              <label for="leetcodeProblem">LeetCode problem solved (this week)</label>
+              <input type="text" id="leetcodeProblem" name="leetcode_problem" required placeholder="e.g. #1929 Concatenation of Array" />
+            </div>
+            <div>
+              <label for="youtubeUrl">YouTube video URL</label>
+              <input type="url" id="youtubeUrl" name="youtube_url" required placeholder="https://www.youtube.com/watch?v=..." />
+              <p class="form-hint">Paste the full YouTube link from your browser address bar.</p>
+            </div>
+            <p class="form-error" id="formError" role="alert"></p>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Submit assignment</button>
+            </div>
+            <div class="form-success" id="formSuccess" role="status">
+              Submission received! Check your email for a confirmation from FormSubmit. You can close this page.
+            </div>
+          </form>
+        </div>`;
+    }
+
+    function initSubmissionForm() {
+      const form = document.getElementById("day6SubmissionForm");
+      if (!form) return;
+
+      const email = (INSTRUCTOR_CONFIG.submissionEmail || "").trim();
+      if (email.includes("@")) {
+        form.action = "https://formsubmit.co/" + encodeURIComponent(email);
+        form.method = "POST";
+
+        const nextUrl = window.location.href.split("?")[0] + "?day6=submitted";
+        const hiddenFields = [
+          { name: "_subject", value: "Day 6 — LeetCode Video Submission (Week 1)" },
+          { name: "_captcha", value: "false" },
+          { name: "_template", value: "table" },
+          { name: "_next", value: nextUrl }
+        ];
+        hiddenFields.forEach((f) => {
+          if (!form.querySelector('input[name="' + f.name + '"]')) {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = f.name;
+            input.value = f.value;
+            form.appendChild(input);
+          }
+        });
+
+        const honey = document.createElement("input");
+        honey.type = "text";
+        honey.name = "_honey";
+        honey.style.display = "none";
+        honey.tabIndex = -1;
+        honey.autocomplete = "off";
+        form.appendChild(honey);
+      }
+
+      if (window.location.search.includes("day6=submitted")) {
+        const success = document.getElementById("formSuccess");
+        if (success) success.classList.add("visible");
+        switchDay(5);
+      }
+
+      form.addEventListener("submit", (e) => {
+        const errEl = document.getElementById("formError");
+        const ytInput = document.getElementById("youtubeUrl");
+        errEl.classList.remove("visible");
+        ytInput.classList.remove("invalid");
+
+        if (!isValidYouTubeUrl(ytInput.value)) {
+          e.preventDefault();
+          errEl.textContent = "Please enter a valid YouTube URL (youtube.com/watch or youtu.be/...).";
+          errEl.classList.add("visible");
+          ytInput.classList.add("invalid");
+          ytInput.focus();
+          return;
+        }
+
+        if (!email.includes("@")) {
+          e.preventDefault();
+          errEl.textContent = "Submission is not configured yet. Ask your instructor to set up the form.";
+          errEl.classList.add("visible");
+          return;
+        }
+
+        try {
+          localStorage.setItem(
+            "placement-day6-submitted",
+            JSON.stringify({
+              name: document.getElementById("studentName").value,
+              roll: document.getElementById("studentRoll").value,
+              problem: document.getElementById("leetcodeProblem").value,
+              url: ytInput.value,
+              at: new Date().toISOString()
+            })
+          );
+        } catch (_) {}
+      });
+    }
+
     function renderSlots(slots) {
       return slots
         .map(
@@ -1032,6 +1305,7 @@
             </div>
             ${renderChecklist(d.day, d.checklist)}
             <div class="day-body">${renderSlots(d.slots)}</div>
+            ${d.hasSubmissionForm ? renderSubmissionForm() : ""}
             <div class="tip-box">
               <div class="tip-label">Advisor&apos;s Tip</div>
               <p class="tip-text">${escapeHtml(d.tip)}</p>
@@ -1044,6 +1318,8 @@
       container.querySelectorAll(".check-item").forEach((item) => {
         item.addEventListener("click", () => toggleCheck(item));
       });
+
+      initSubmissionForm();
     }
 
     function toggleCheck(item) {
