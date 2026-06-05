@@ -517,6 +517,27 @@
 
     .load-error.visible { display: block; }
 
+    .submission-box {
+      margin: 0;
+      padding: 18px 20px;
+      background: var(--surface2);
+      border-top: 1px solid var(--border);
+    }
+
+    .submission-box h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--green);
+    }
+
+    .submission-box .sub-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.55;
+    }
+
     .google-form-embed {
       width: 100%;
       min-height: 520px;
@@ -568,7 +589,7 @@
 
     <div class="progress-wrap">
       <div class="progress-header">
-        <span>Overall progress (Week 1)</span>
+        <span id="progressLabel">Overall progress (Week 1)</span>
         <strong id="progressPct">0%</strong>
       </div>
       <div class="progress-bar">
@@ -577,9 +598,9 @@
     </div>
 
     <div class="section-label">Select week</div>
-    <div class="week-nav">
-      <button class="week-btn active" id="week1Btn" type="button">Week 1 — Days 1–6</button>
-      <button class="week-btn" type="button" disabled title="Coming soon">Week 2</button>
+    <div class="week-nav" id="weekNav">
+      <button class="week-btn active" type="button" data-week="1">Week 1 — Days 1–6</button>
+      <button class="week-btn" type="button" data-week="2">Week 2 — Days 7–12 (DSA)</button>
     </div>
 
     <div class="section-label">Select day</div>
@@ -625,6 +646,7 @@
 
     const days = [
       {
+        week: 1,
         day: 1,
         title: "Git & GitHub — absolute basics",
         subtitle: "What is version control? Setting up GitHub account and first repo.",
@@ -671,6 +693,7 @@
         tip: "Day 1 tip: Don't rush the GitHub setup. A clean first repo with a proper README is more valuable than speed."
       },
       {
+        week: 1,
         day: 2,
         title: "Git workflow + AI Tool #1: Cursor IDE",
         subtitle: "Learn branching, commit messages. Explore advanced multi-file AI editing and Vibe Coding.",
@@ -725,6 +748,7 @@
         tip: "Cursor Tip: Use Composer (Ctrl+I) for boilerplate. Scope context with @Files or @Folders."
       },
       {
+        week: 1,
         day: 3,
         title: "GitHub profile + Profile Redesign",
         subtitle: "Build your GitHub profile README. Refine markdown styles.",
@@ -768,6 +792,7 @@
         tip: "Commit something every day — employers look at your GitHub activity graph."
       },
       {
+        week: 1,
         day: 4,
         title: "Git collaboration + AI Tool #2: Claude Code (CLI)",
         subtitle: "Forks, open source basics. Run terminal-bound agentic tasks from your CLI.",
@@ -819,6 +844,7 @@
         tip: "Pipe error logs into your CLI agent for faster debugging."
       },
       {
+        week: 1,
         day: 5,
         title: "Weekly review + Logical Reasoning begins",
         subtitle: "Consolidate GitHub + AI tools. Start logical reasoning.",
@@ -869,6 +895,7 @@
         tip: "Review Days 1–4: explain the difference between Cursor Composer and Claude Code CLI."
       },
       {
+        week: 1,
         day: 6,
         title: "Week 1 assignment — LeetCode video submission",
         subtitle: "At-home assignment (no campus mock test). Record yourself solving any LeetCode problem you completed this week and submit your YouTube link below.",
@@ -898,11 +925,340 @@
           }
         ],
         tip: "Treat the video like teaching a junior: speak clearly, show your thought process, and mention one mistake you almost made. Unlisted YouTube links are fine if you do not want the video public."
+      },
+      {
+        week: 2,
+        day: 7,
+        title: "DSA Kickoff — Arrays, Strings & Hashing",
+        subtitle: "Week 2 begins: master the hash map pattern — the most common interview building block after arrays.",
+        tags: ["tag-lc"],
+        tagLabels: ["Arrays & Hashing"],
+        checklist: [
+          "Watched arrays & hashing concept video; wrote 3 situations where hash maps beat nested loops.",
+          "Green submission on LeetCode #1 (Two Sum) and #217 (Contains Duplicate).",
+          "Added solution notes to Placement-Prep-2026 repo under week2/day7-hashing.md.",
+          "Minimum 15 profit-and-loss aptitude questions solved on IndiaBIX."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "55 min",
+            name: "Concept — Arrays, strings & hash maps",
+            desc: "Understand array traversal, frequency counting, and O(1) lookups. Key idea: trade space for time using a hash map.",
+            resources: [
+              { label: "NeetCode: Arrays & Hashing", type: "res-lc", url: "https://neetcode.io/practice?tab=neetcode150&category=Arrays%20%26%20Hashing" },
+              { label: "YT: Hash Maps — NeetCode", type: "res-yt", url: "https://www.youtube.com/watch?v=KLlXCFG5TnA" },
+              { label: "Striver: Day 1 (Arrays)", type: "res-web", url: "https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2" },
+              { label: "YT: Arrays — Abdul Bari", type: "res-yt", url: "https://www.youtube.com/watch?v=pmN9ExDf3yQ" }
+            ]
+          },
+          {
+            time: "10:00 AM", dur: "50 min",
+            name: "Pattern practice — frequency & complement",
+            desc: "Solve Two Sum pattern: for each element, check if complement exists in map. Then solve duplicate detection with a set.",
+            resources: [
+              { label: "LeetCode #1 Two Sum", type: "res-lc", url: "https://leetcode.com/problems/two-sum/" },
+              { label: "LeetCode #217 Contains Duplicate", type: "res-lc", url: "https://leetcode.com/problems/contains-duplicate/" },
+              { label: "NeetCode Roadmap", type: "res-web", url: "https://neetcode.io/roadmap" }
+            ]
+          },
+          {
+            time: "11:00 AM", dur: "40 min",
+            name: "Stretch — 1 extra hashing problem",
+            desc: "Optional if time permits: #242 Valid Anagram. Focus on character frequency counting.",
+            resources: [
+              { label: "LeetCode #242", type: "res-lc", url: "https://leetcode.com/problems/valid-anagram/" }
+            ]
+          },
+          {
+            time: "11:45 AM", dur: "30 min",
+            name: "Aptitude — Profit & Loss basics",
+            desc: "New topic for Week 2. Solve 15 questions. Maintain aptitude alongside DSA.",
+            resources: [
+              { label: "IndiaBix Profit & Loss", type: "res-web", url: "https://www.indiabix.com/aptitude/profit-and-loss/" }
+            ]
+          }
+        ],
+        tip: "Week 2 rule: understand the pattern first, then code. After solving, write one sentence — 'This problem uses hashing because…'"
+      },
+      {
+        week: 2,
+        day: 8,
+        title: "Two Pointers Pattern",
+        subtitle: "Learn the two-pointer technique for sorted arrays, palindromes, and in-place array manipulation.",
+        tags: ["tag-lc"],
+        tagLabels: ["Two Pointers"],
+        checklist: [
+          "Understood opposite-direction vs same-direction two-pointer patterns.",
+          "Green submission on LeetCode #125 (Valid Palindrome) and #167 (Two Sum II).",
+          "Can explain why two pointers work on sorted arrays in O(n) time.",
+          "Minimum 15 profit-and-loss questions solved on IndiaBIX."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "50 min",
+            name: "Concept — Two pointers technique",
+            desc: "Two types: (1) opposite ends moving inward, (2) slow/fast pointers. Watch before coding.",
+            resources: [
+              { label: "NeetCode: Two Pointers", type: "res-lc", url: "https://neetcode.io/practice?tab=neetcode150&category=Two%20Pointers" },
+              { label: "YT: Two Pointers — NeetCode", type: "res-yt", url: "https://www.youtube.com/watch?v=On03HWe2tZM" },
+              { label: "GFG: Two Pointer Technique", type: "res-web", url: "https://www.geeksforgeeks.org/two-pointers-technique/" }
+            ]
+          },
+          {
+            time: "10:00 AM", dur: "50 min",
+            name: "LeetCode — Opposite pointer problems",
+            desc: "#125 Valid Palindrome (skip non-alphanumeric), #167 Two Sum II (sorted array, two pointers).",
+            resources: [
+              { label: "LeetCode #125", type: "res-lc", url: "https://leetcode.com/problems/valid-palindrome/" },
+              { label: "LeetCode #167", type: "res-lc", url: "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/" }
+            ]
+          },
+          {
+            time: "11:00 AM", dur: "40 min",
+            name: "LeetCode — Same-direction pointers",
+            desc: "#283 Move Zeroes: in-place array manipulation using read/write pointers.",
+            resources: [
+              { label: "LeetCode #283", type: "res-lc", url: "https://leetcode.com/problems/move-zeroes/" },
+              { label: "YT: Move Zeroes — NeetCode", type: "res-yt", url: "https://www.youtube.com/watch?v=aMHUjnfIeIM" }
+            ]
+          },
+          {
+            time: "11:45 AM", dur: "30 min",
+            name: "Aptitude — Profit & Loss mixed",
+            desc: "15 mixed P&L questions including markup and discount.",
+            resources: [
+              { label: "IndiaBix P&L Practice", type: "res-web", url: "https://www.indiabix.com/aptitude/profit-and-loss/" }
+            ]
+          }
+        ],
+        tip: "Before coding two-pointer problems, ask: are the elements sorted? If yes, two pointers is likely the optimal approach."
+      },
+      {
+        week: 2,
+        day: 9,
+        title: "Stacks & Queues",
+        subtitle: "Master LIFO/FIFO thinking — essential for parentheses, monotonic stacks, and BFS later.",
+        tags: ["tag-lc"],
+        tagLabels: ["Stack & Queue"],
+        checklist: [
+          "Understand stack push/pop and queue enqueue/dequeue with one real-world example each.",
+          "Green submission on LeetCode #1047 (Remove Adjacent Duplicates) and #496 (Next Greater Element I).",
+          "Committed today's stack solutions to Placement-Prep-2026/week2/.",
+          "Minimum 15 logical-reasoning (blood relations) questions on IndiaBIX."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "50 min",
+            name: "Concept — Stack & queue fundamentals",
+            desc: "Stack = LIFO (Last In First Out). Queue = FIFO. Know array-based and linked-list implementations.",
+            resources: [
+              { label: "NeetCode: Stack", type: "res-lc", url: "https://neetcode.io/practice?tab=neetcode150&category=Stack" },
+              { label: "YT: Stack — mycodeschool", type: "res-yt", url: "https://www.youtube.com/watch?v=F1F2imiOjfQ" },
+              { label: "YT: Queue — mycodeschool", type: "res-yt", url: "https://www.youtube.com/watch?v=XuCbpw6Bj1U" },
+              { label: "VisuAlgo: Stack & Queue", type: "res-web", url: "https://visualgo.net/en/stack" }
+            ]
+          },
+          {
+            time: "10:00 AM", dur: "50 min",
+            name: "LeetCode — Stack pattern problems",
+            desc: "#1047 uses stack for adjacent duplicate removal. #496 uses monotonic stack for next greater element.",
+            resources: [
+              { label: "LeetCode #1047", type: "res-lc", url: "https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/" },
+              { label: "LeetCode #496", type: "res-lc", url: "https://leetcode.com/problems/next-greater-element-i/" },
+              { label: "YT: Valid Parentheses — NeetCode", type: "res-yt", url: "https://www.youtube.com/watch?v=WTzjTskDFMg" }
+            ]
+          },
+          {
+            time: "11:00 AM", dur: "40 min",
+            name: "Stretch — Queue using stacks",
+            desc: "Optional: #232 Implement Queue using Stacks. Reinforces understanding of both data structures.",
+            resources: [
+              { label: "LeetCode #232", type: "res-lc", url: "https://leetcode.com/problems/implement-queue-using-stacks/" }
+            ]
+          },
+          {
+            time: "11:45 AM", dur: "30 min",
+            name: "Aptitude — Blood relations",
+            desc: "15 blood-relation logical reasoning questions. Common in campus tests.",
+            resources: [
+              { label: "IndiaBix Blood Relations", type: "res-web", url: "https://www.indiabix.com/logical-reasoning/blood-relationship/" }
+            ]
+          }
+        ],
+        tip: "Stack tip: when you see 'matching pairs' or 'nearest greater/smaller element' — think stack immediately."
+      },
+      {
+        week: 2,
+        day: 10,
+        title: "Linked Lists — fundamentals",
+        subtitle: "Pointers, node traversal, reversal — the classic interview data structure.",
+        tags: ["tag-lc"],
+        tagLabels: ["Linked List"],
+        checklist: [
+          "Can draw singly linked list node structure and explain null termination.",
+          "Green submission on LeetCode #206 (Reverse Linked List) and #876 (Middle of Linked List).",
+          "Solved reversal both iteratively and recursively; noted which you prefer.",
+          "Minimum 15 direction-sense logical reasoning questions on IndiaBIX."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "55 min",
+            name: "Concept — Linked list basics",
+            desc: "Singly vs doubly linked lists. Traversal, insertion, deletion. Understand why nodes use pointers.",
+            resources: [
+              { label: "NeetCode: Linked List", type: "res-lc", url: "https://neetcode.io/practice?tab=neetcode150&category=Linked%20List" },
+              { label: "YT: Linked Lists — freeCodeCamp", type: "res-yt", url: "https://www.youtube.com/watch?v=R9PTBwOzCcI" },
+              { label: "YT: Reverse LL — NeetCode", type: "res-yt", url: "https://www.youtube.com/watch?v=G0_I-ZFuiTs" }
+            ]
+          },
+          {
+            time: "10:00 AM", dur: "50 min",
+            name: "LeetCode — Reversal & traversal",
+            desc: "#206 Reverse Linked List (must-know). #876 Middle of Linked List (slow/fast pointers).",
+            resources: [
+              { label: "LeetCode #206", type: "res-lc", url: "https://leetcode.com/problems/reverse-linked-list/" },
+              { label: "LeetCode #876", type: "res-lc", url: "https://leetcode.com/problems/middle-of-the-linked-list/" }
+            ]
+          },
+          {
+            time: "11:00 AM", dur: "40 min",
+            name: "Stretch — Cycle detection",
+            desc: "Optional: #141 Linked List Cycle (Floyd's tortoise & hare). Builds on slow/fast pointer pattern.",
+            resources: [
+              { label: "LeetCode #141", type: "res-lc", url: "https://leetcode.com/problems/linked-list-cycle/" },
+              { label: "YT: LL Cycle — NeetCode", type: "res-yt", url: "https://www.youtube.com/watch?v=gBTe7IfrWQw" }
+            ]
+          },
+          {
+            time: "11:45 AM", dur: "30 min",
+            name: "Aptitude — Direction sense",
+            desc: "15 direction-sense LR questions. Practice reading carefully under time pressure.",
+            resources: [
+              { label: "IndiaBix Direction Sense", type: "res-web", url: "https://www.indiabix.com/logical-reasoning/direction-sense-test/" }
+            ]
+          }
+        ],
+        tip: "Reverse linked list is asked in almost every service-company interview. Practice until you can code it in under 5 minutes."
+      },
+      {
+        week: 2,
+        day: 11,
+        title: "Binary Search — sorted array patterns",
+        subtitle: "O(log n) search on sorted data — a pattern that unlocks dozens of medium problems.",
+        tags: ["tag-lc"],
+        tagLabels: ["Binary Search"],
+        checklist: [
+          "Understand binary search template: left, right, mid, shrink range.",
+          "Green submission on LeetCode #704 (Binary Search) and #35 (Search Insert Position).",
+          "Can write binary search from scratch without looking at notes.",
+          "Minimum 15 partnership aptitude questions on IndiaBIX."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "50 min",
+            name: "Concept — Binary search fundamentals",
+            desc: "Works only on sorted data. Template: while left <= right, mid = left + (right-left)/2. Avoid overflow.",
+            resources: [
+              { label: "NeetCode: Binary Search", type: "res-lc", url: "https://neetcode.io/practice?tab=neetcode150&category=Binary%20Search" },
+              { label: "YT: Binary Search — Abdul Bari", type: "res-yt", url: "https://www.youtube.com/watch?v=GU7DpgHINWQ" },
+              { label: "YT: Binary Search — NeetCode", type: "res-yt", url: "https://www.youtube.com/watch?v=s9DPMeys3R8" }
+            ]
+          },
+          {
+            time: "10:00 AM", dur: "50 min",
+            name: "LeetCode — Classic binary search",
+            desc: "#704 standard search. #35 search insert position — same template, different exit condition.",
+            resources: [
+              { label: "LeetCode #704", type: "res-lc", url: "https://leetcode.com/problems/binary-search/" },
+              { label: "LeetCode #35", type: "res-lc", url: "https://leetcode.com/problems/search-insert-position/" }
+            ]
+          },
+          {
+            time: "11:00 AM", dur: "40 min",
+            name: "Stretch — 2D matrix search",
+            desc: "Optional medium: #74 Search a 2D Matrix. Apply binary search on rows then columns.",
+            resources: [
+              { label: "LeetCode #74", type: "res-lc", url: "https://leetcode.com/problems/search-a-2d-matrix/" },
+              { label: "YT: Search 2D Matrix — NeetCode", type: "res-yt", url: "https://www.youtube.com/watch?v=Ber2pi2C0j0" }
+            ]
+          },
+          {
+            time: "11:45 AM", dur: "30 min",
+            name: "Aptitude — Partnership",
+            desc: "15 partnership questions. New topic — learn formula: profit share = capital × time.",
+            resources: [
+              { label: "IndiaBix Partnership", type: "res-web", url: "https://www.indiabix.com/aptitude/partnership/" }
+            ]
+          }
+        ],
+        tip: "Binary search tip: if the problem mentions 'sorted' or 'find in O(log n)' — binary search is almost always the answer."
+      },
+      {
+        week: 2,
+        day: 12,
+        title: "Week 2 DSA Review & Timed Practice",
+        subtitle: "Consolidate all 5 patterns from this week. Timed problem-solving + pattern cheat sheet.",
+        tags: ["tag-lc", "tag-apt"],
+        tagLabels: ["DSA Review", "Aptitude"],
+        checklist: [
+          "Timed 60-min session: solved 2 problems from Week 2 topics without solution hints.",
+          "Created week2/patterns-cheatsheet.md in Placement-Prep-2026 with all 5 patterns and 1 example each.",
+          "Reviewed all red/wrong submissions from Days 7–11 and re-solved at least 2.",
+          "Minimum 15 mixed logical-reasoning questions on IndiaBIX."
+        ],
+        slots: [
+          {
+            time: "9:00 AM", dur: "60 min",
+            name: "Timed DSA mock — 2 problems",
+            desc: "Set a 60-minute timer. Pick 2 problems you have not solved green yet from Week 2 (hashing, two pointers, stack, linked list, or binary search). No IDE autocomplete hints.",
+            resources: [
+              { label: "LeetCode Problem List", type: "res-lc", url: "https://leetcode.com/problemset/" },
+              { label: "NeetCode 150 Sheet", type: "res-web", url: "https://neetcode.io/practice" },
+              { label: "Interview Prep Guide", type: "res-web", url: "interview-prep.html" }
+            ]
+          },
+          {
+            time: "10:10 AM", dur: "40 min",
+            name: "Pattern cheat sheet + GitHub commit",
+            desc: "Write week2/patterns-cheatsheet.md covering: Hashing, Two Pointers, Stack, Linked List, Binary Search — one template + one example problem each. Commit to Placement-Prep-2026.",
+            resources: [
+              { label: "Striver A2Z Sheet", type: "res-web", url: "https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2" },
+              { label: "Markdown Guide", type: "res-web", url: "https://www.markdownguide.org/basic-syntax/" }
+            ]
+          },
+          {
+            time: "10:55 AM", dur: "35 min",
+            name: "Weak-topic re-solve",
+            desc: "Go to LeetCode submissions. Re-solve any Week 2 problem you submitted but did not fully understand.",
+            resources: [
+              { label: "LeetCode Submissions", type: "res-lc", url: "https://leetcode.com/submissions/" }
+            ]
+          },
+          {
+            time: "11:35 AM", dur: "30 min",
+            name: "Aptitude — Mixed LR revision",
+            desc: "15 mixed logical-reasoning questions (blood relations, direction sense, seating).",
+            resources: [
+              { label: "IndiaBix Logical Reasoning", type: "res-web", url: "https://www.indiabix.com/logical-reasoning/" }
+            ]
+          }
+        ],
+        tip: "Week 2 done = 5 core patterns in your toolkit. Week 3 will add sliding window, trees, and recursion. Keep your cheat sheet updated."
       }
     ];
 
+    const WEEKS = [
+      { id: 1, label: "Week 1", range: "Days 1–6" },
+      { id: 2, label: "Week 2", range: "Days 7–12" }
+    ];
+
+    let currentWeek = 1;
     let currentDay = 0;
     let checked = {};
+
+    function getWeekDays(week) {
+      return days.filter((d) => d.week === week);
+    }
 
     function emptyProgress() {
       const init = {};
@@ -945,10 +1301,11 @@
       return items && items.length > 0 && items.every(Boolean);
     }
 
-    function getOverallProgress() {
+    function getWeekProgress(week) {
+      const weekDays = getWeekDays(week);
       let done = 0;
       let total = 0;
-      days.forEach((d) => {
+      weekDays.forEach((d) => {
         total += d.checklist.length;
         done += (checked[d.day] || []).filter(Boolean).length;
       });
@@ -956,14 +1313,29 @@
     }
 
     function updateProgressUI() {
-      const pct = getOverallProgress();
+      const weekMeta = WEEKS.find((w) => w.id === currentWeek) || WEEKS[0];
+      const pct = getWeekProgress(currentWeek);
+      document.getElementById("progressLabel").textContent =
+        "Overall progress (" + weekMeta.label + " — " + weekMeta.range + ")";
       document.getElementById("progressPct").textContent = pct + "%";
       document.getElementById("progressFill").style.width = pct + "%";
     }
 
+    function selectWeek(week) {
+      currentWeek = week;
+      currentDay = 0;
+      document.querySelectorAll(".week-btn").forEach((btn) => {
+        btn.classList.toggle("active", Number(btn.dataset.week) === week);
+      });
+      renderTabs();
+      renderPanels();
+      updateProgressUI();
+    }
+
     function renderTabs() {
+      const weekDays = getWeekDays(currentWeek);
       const tabs = document.getElementById("dayTabs");
-      tabs.innerHTML = days
+      tabs.innerHTML = weekDays
         .map(
           (d, i) =>
             `<button class="day-tab${i === currentDay ? " active" : ""}${isDayComplete(d.day) ? " done" : ""}" 
@@ -1034,8 +1406,9 @@
     }
 
     function renderPanels() {
+      const weekDays = getWeekDays(currentWeek);
       const container = document.getElementById("dayPanels");
-      container.innerHTML = days
+      container.innerHTML = weekDays
         .map(
           (d, i) => `
         <div class="panel${i === currentDay ? " active" : ""}" id="panel-${d.day}" role="tabpanel">
@@ -1088,7 +1461,7 @@
     }
 
     document.getElementById("resetDayBtn").addEventListener("click", () => {
-      const d = days[currentDay];
+      const d = getWeekDays(currentWeek)[currentDay];
       if (confirm(`Reset all checklist items for Day ${d.day}?`)) {
         checked[d.day] = d.checklist.map(() => false);
         saveProgress();
@@ -1114,6 +1487,9 @@
 
     function initApp() {
       checked = loadProgress();
+      document.querySelectorAll(".week-btn").forEach((btn) => {
+        btn.addEventListener("click", () => selectWeek(Number(btn.dataset.week)));
+      });
       renderTabs();
       renderPanels();
       updateProgressUI();

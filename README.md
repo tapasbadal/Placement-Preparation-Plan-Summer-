@@ -6,5 +6,5 @@ This document establishes a highly structured Kickstart Blueprint to maximize st
 
 | Page | Description |
 |------|-------------|
-| [index.html](index.html) | 60-day summer daily plan (Week 1: Days 1–6) with checklists |
+| [index.html](index.html) | 60-day summer daily plan — Week 1 (Days 1–6) + Week 2 DSA (Days 7–12) |
 | [interview-prep.html](interview-prep.html) | Tech company interview prep — DSA, CS fundamentals, company guides, resources |
